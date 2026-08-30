@@ -52,15 +52,15 @@ const GradePredictor = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 bg-gray-50 min-h-screen">
+    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 bg-gray-50 dark:bg-[#0a0f1a] min-h-screen transition-colors duration-300">
       <div className="text-center mb-12 animate-fade-in">
         <div className="inline-flex items-center justify-center p-4 bg-iitm-blue text-white rounded-2xl mb-6 shadow-xl transform hover:scale-105 transition-transform duration-300">
           <Calculator className="w-10 h-10" />
         </div>
-        <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl tracking-tight">
+        <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl tracking-tight">
           Grade Predictor
         </h1>
-        <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+        <p className="mt-4 text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
           Accurately forecast your final course grade by experimenting with different score scenarios across all components.
         </p>
       </div>
@@ -71,9 +71,9 @@ const GradePredictor = () => {
         <div className="lg:col-span-2 space-y-8 animate-fade-in-up">
           
           {/* Level Selector */}
-          <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-6 sm:p-8">
-            <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-iitm-blue" /> Select Level
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 sm:p-8 transition-colors duration-300">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <BookOpen className="w-5 h-5 text-iitm-blue dark:text-iitm-light-blue" /> Select Level
             </h2>
             <div className="flex flex-wrap gap-3">
               {Object.keys(coursesConfig).map((lvl) => (
@@ -83,7 +83,7 @@ const GradePredictor = () => {
                   className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
                     level === lvl
                       ? 'bg-iitm-blue text-white shadow-md scale-105'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
                   {lvl}
@@ -93,7 +93,7 @@ const GradePredictor = () => {
 
             {/* Course Selector */}
             <div className="mt-8">
-              <label htmlFor="course-select" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="course-select" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Select Course
               </label>
               <select
@@ -103,7 +103,7 @@ const GradePredictor = () => {
                   const selected = coursesConfig[level].find(c => c.id === e.target.value);
                   setCourse(selected);
                 }}
-                className="mt-1 block w-full pl-3 pr-10 py-3 text-base border-gray-300 focus:outline-none focus:ring-iitm-blue focus:border-iitm-blue sm:text-sm rounded-xl shadow-sm bg-gray-50"
+                className="mt-1 block w-full pl-3 pr-10 py-3 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-iitm-blue focus:border-iitm-blue sm:text-sm rounded-xl shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-300"
               >
                 {coursesConfig[level].map((c) => (
                   <option key={c.id} value={c.id}>{c.name}</option>
@@ -113,16 +113,16 @@ const GradePredictor = () => {
           </div>
 
           {/* Input Sliders */}
-          <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-6 sm:p-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-6 border-l-4 border-iitm-blue pl-4">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 sm:p-8 transition-colors duration-300">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 border-l-4 border-iitm-blue dark:border-iitm-light-blue pl-4">
               Enter Your Scores
             </h2>
             <div className="space-y-8">
               {course.components.map((comp) => (
                 <div key={comp.id} className="relative">
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-medium text-gray-700">{comp.label}</label>
-                    <div className="flex items-center space-x-2 bg-blue-50 px-3 py-1 rounded-full">
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{comp.label}</label>
+                    <div className="flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full transition-colors duration-300">
                       <input
                         type="number"
                         min="0"
@@ -137,9 +137,9 @@ const GradePredictor = () => {
                           }
                           handleScoreChange(comp.id, val);
                         }}
-                        className="w-16 text-right bg-transparent font-bold text-iitm-blue focus:outline-none focus:ring-1 focus:ring-iitm-blue rounded"
+                        className="w-16 text-right bg-transparent font-bold text-iitm-blue dark:text-white focus:outline-none focus:ring-1 focus:ring-iitm-blue dark:focus:ring-white rounded"
                       />
-                      <span className="text-sm font-bold text-iitm-blue">
+                      <span className="text-sm font-bold text-iitm-blue dark:text-blue-300">
                         / {comp.max}
                       </span>
                     </div>
@@ -150,9 +150,9 @@ const GradePredictor = () => {
                     max={comp.max}
                     value={scores[comp.id] || 0}
                     onChange={(e) => handleScoreChange(comp.id, Number(e.target.value))}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-iitm-blue"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-iitm-blue dark:accent-iitm-light-blue"
                   />
-                  <div className="flex justify-between text-xs text-gray-400 mt-1 px-1">
+                  <div className="flex justify-between text-xs text-gray-400 dark:text-gray-500 mt-1 px-1">
                     <span>0</span>
                     <span>{comp.max}</span>
                   </div>

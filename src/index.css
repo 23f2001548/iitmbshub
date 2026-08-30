@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-iitm-blue: #003366;
@@ -19,8 +22,81 @@
   }
 }
 
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #f8fafc;
   color: #1e293b;
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode body */
+.dark body {
+  background-color: #0a0f1a;
+  color: #e2e8f0;
+}
+
+/* Smooth transitions for theme switching */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+/* Override transitions for elements that shouldn't transition */
+a, button, input, select, textarea {
+  transition-property: background-color, border-color, color, box-shadow, transform, opacity;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Custom range slider for dark mode */
+.dark input[type="range"] {
+  background: #334155;
+}
+
+/* Selection color */
+::selection {
+  background-color: #003366;
+  color: #ffffff;
+}
+
+.dark ::selection {
+  background-color: #F2A900;
+  color: #000000;
 }

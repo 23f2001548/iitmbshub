@@ -158,40 +158,43 @@ const channelsToSubscribe = [
 
 const Home = () => {
   return (
-    <div className="flex flex-col space-y-12 pb-12">
+    <div className="flex flex-col space-y-12 pb-12 transition-colors duration-300">
       {/* Hero Section */}
-      <section className="bg-white shadow-sm border-b border-gray-200 pt-16 pb-20 px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-          <span className="block">Welcome to</span>
-          <span className="block text-iitm-blue">IITM BS Hub</span>
-        </h1>
-        <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-          Your all-in-one companion for the IIT Madras BS Degree program. Access tools, resources, and community links in one place.
-        </p>
+      <section className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-800 pt-16 pb-20 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden transition-colors duration-300">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-50/50 dark:to-gray-900/50 pointer-events-none" />
+        <div className="relative z-10 animate-fade-in-up">
+          <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
+            <span className="block">Welcome to</span>
+            <span className="block text-iitm-blue dark:text-blue-300 mt-2">IITM BS Hub</span>
+          </h1>
+          <p className="mt-5 max-w-md mx-auto text-base text-gray-500 dark:text-gray-300 sm:text-lg md:mt-8 md:text-xl md:max-w-3xl">
+            Your all-in-one companion for the IIT Madras BS Degree program. Access tools, resources, and community links in one place.
+          </p>
+        </div>
       </section>
 
       {/* Essential Portals Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Essential Portals</h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full animate-fade-in">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Essential Portals</h2>
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {externalPortals.map((portal) => (
             <a
               key={portal.name}
               href={portal.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md hover:border-iitm-light-blue transition-all duration-200 flex flex-col group relative"
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg hover:border-iitm-light-blue dark:hover:border-iitm-blue transition-all duration-300 hover:-translate-y-1 flex flex-col group relative"
             >
               <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-iitm-blue" />
+                <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue" />
               </div>
-              <div className={`p-3 rounded-lg inline-flex w-fit mb-4 ${portal.color}`}>
+              <div className={`p-3 rounded-xl inline-flex w-fit mb-4 ${portal.color} dark:bg-opacity-20`}>
                 <portal.icon className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-iitm-blue transition-colors pr-8">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue transition-colors pr-8">
                 {portal.name}
               </h3>
-              <p className="mt-2 text-sm text-gray-500 flex-grow">
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 flex-grow leading-relaxed">
                 {portal.description}
               </p>
             </a>
@@ -200,22 +203,22 @@ const Home = () => {
       </section>
 
       {/* Features Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Quick Access</h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full animate-fade-in">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Quick Access</h2>
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature) => (
             <Link
               key={feature.name}
               to={feature.path}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md hover:border-iitm-light-blue transition-all duration-200 flex flex-col group"
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg hover:border-iitm-light-blue dark:hover:border-iitm-blue transition-all duration-300 hover:-translate-y-1 flex flex-col group"
             >
-              <div className={`p-3 rounded-lg inline-flex w-fit mb-4 ${feature.color}`}>
+              <div className={`p-3 rounded-xl inline-flex w-fit mb-4 ${feature.color} dark:bg-opacity-20`}>
                 <feature.icon className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-iitm-blue transition-colors">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue transition-colors">
                 {feature.name}
               </h3>
-              <p className="mt-2 text-sm text-gray-500 flex-grow">
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 flex-grow leading-relaxed">
                 {feature.description}
               </p>
             </Link>
@@ -224,27 +227,27 @@ const Home = () => {
       </section>
 
       {/* Resources and Notes */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Resources and Notes</h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full animate-fade-in">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Resources and Notes</h2>
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {resourcesAndNotes.map((resource) => (
             <a
               key={resource.name}
               href={resource.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md hover:border-iitm-light-blue transition-all duration-200 flex flex-col group relative"
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg hover:border-iitm-light-blue dark:hover:border-iitm-blue transition-all duration-300 hover:-translate-y-1 flex flex-col group relative"
             >
               <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-iitm-blue" />
+                <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue" />
               </div>
-              <div className={`p-3 rounded-lg inline-flex w-fit mb-4 ${resource.color}`}>
+              <div className={`p-3 rounded-xl inline-flex w-fit mb-4 ${resource.color} dark:bg-opacity-20`}>
                 <resource.icon className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-iitm-blue transition-colors pr-8">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue transition-colors pr-8">
                 {resource.name}
               </h3>
-              <p className="mt-2 text-sm text-gray-500 flex-grow">
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 flex-grow leading-relaxed">
                 {resource.description}
               </p>
             </a>
@@ -253,27 +256,27 @@ const Home = () => {
       </section>
 
       {/* PYQs and Mock Tests */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">PYQs and Mock Tests</h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full animate-fade-in">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">PYQs and Mock Tests</h2>
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {pyqsAndMockTests.map((item) => (
             <a
               key={item.name}
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md hover:border-iitm-light-blue transition-all duration-200 flex flex-col group relative"
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg hover:border-iitm-light-blue dark:hover:border-iitm-blue transition-all duration-300 hover:-translate-y-1 flex flex-col group relative"
             >
               <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-iitm-blue" />
+                <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue" />
               </div>
-              <div className={`p-3 rounded-lg inline-flex w-fit mb-4 ${item.color}`}>
+              <div className={`p-3 rounded-xl inline-flex w-fit mb-4 ${item.color} dark:bg-opacity-20`}>
                 <item.icon className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-iitm-blue transition-colors pr-8">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue transition-colors pr-8">
                 {item.name}
               </h3>
-              <p className="mt-2 text-sm text-gray-500 flex-grow">
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 flex-grow leading-relaxed">
                 {item.description}
               </p>
             </a>
@@ -282,27 +285,27 @@ const Home = () => {
       </section>
 
       {/* Channels you must subscribe */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Channels you must subscribe</h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full animate-fade-in">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Channels you must subscribe</h2>
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {channelsToSubscribe.map((channel) => (
             <a
               key={channel.name}
               href={channel.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md hover:border-iitm-light-blue transition-all duration-200 flex flex-col group relative"
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg hover:border-iitm-light-blue dark:hover:border-iitm-blue transition-all duration-300 hover:-translate-y-1 flex flex-col group relative"
             >
               <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-iitm-blue" />
+                <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue" />
               </div>
-              <div className={`p-3 rounded-lg inline-flex w-fit mb-4 ${channel.color}`}>
+              <div className={`p-3 rounded-xl inline-flex w-fit mb-4 ${channel.color} dark:bg-opacity-20`}>
                 <channel.icon className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-iitm-blue transition-colors pr-8">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue transition-colors pr-8">
                 {channel.name}
               </h3>
-              <p className="mt-2 text-sm text-gray-500 flex-grow">
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 flex-grow leading-relaxed">
                 {channel.description}
               </p>
             </a>
