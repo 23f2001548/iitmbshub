@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-iitm-blue: #003366;
+  --color-iitm-gold: #F2A900;
+  --color-iitm-light-blue: #00509E;
+  --color-iitm-light-gold: #FFC72C;
+  --animate-fade-in: fade-in 0.4s ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
