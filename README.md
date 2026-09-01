@@ -19,6 +19,7 @@ Quick links to official IITM platforms:
 | **Looker / Data Studio** | Academic performance analytics, reports, and dashboards | [Visit](https://datastudio.google.com/u/0/reporting/d02dac13-665b-49cc-8d51-0451268a6a3e/page/p_5egdu7yurd) |
 | **Score Checker** | Check current term scores, eligibility, and qualifier results | [Visit](https://study.iitm.ac.in/score-checker) |
 | **Student Activities** | Central platform by SEC for events and academic sessions | [Visit](https://iitmbs.org/) |
+| **Course Planner** | Plan your courses and academic schedule | [Visit](https://course-planner-140256174016.asia-south1.run.app/dashboard) |
 
 ---
 
