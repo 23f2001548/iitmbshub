@@ -44,6 +44,13 @@ const externalPortals = [
     url: 'https://iitmbs.org/',
     color: 'bg-violet-100 text-violet-600',
   },
+  {
+    name: 'Course Planner',
+    description: 'Plan your courses and academic schedule.',
+    icon: CalendarDays,
+    url: 'https://course-planner-140256174016.asia-south1.run.app/dashboard',
+    color: 'bg-amber-100 text-amber-600',
+  },
 ];
 
 const features = [
