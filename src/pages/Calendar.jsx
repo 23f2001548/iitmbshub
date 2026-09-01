@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { CalendarDays, CheckCircle2, Info, Edit3, ClipboardList, ChevronRight } from 'lucide-react';
 
 const sep2026Data = {
@@ -75,48 +76,46 @@ const futureTermsData = {
 
 const getTypeStyles = (type) => {
   switch (type) {
-    case 'exam': return { bg: 'bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40', border: 'border-red-200 dark:border-red-800', text: 'text-red-700 dark:text-red-300', icon: <Edit3 className="w-5 h-5" /> };
-    case 'registration': return { bg: 'bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/40', border: 'border-blue-200 dark:border-blue-800', text: 'text-blue-700 dark:text-blue-300', icon: <ClipboardList className="w-5 h-5" /> };
-    case 'result': return { bg: 'bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/40', border: 'border-green-200 dark:border-green-800', text: 'text-green-700 dark:text-green-300', icon: <CheckCircle2 className="w-5 h-5" /> };
-    default: return { bg: 'bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800', border: 'border-gray-200 dark:border-gray-700', text: 'text-gray-700 dark:text-gray-200', icon: <Info className="w-5 h-5" /> };
+    case 'exam': return { bg: 'bg-rose-50/50 dark:bg-rose-900/10', border: 'border-rose-100 dark:border-rose-900/30', text: 'text-rose-600 dark:text-rose-400', icon: <Edit3 className="w-5 h-5" />, glow: 'group-hover:shadow-[0_0_15px_rgba(225,29,72,0.15)]' };
+    case 'registration': return { bg: 'bg-blue-50/50 dark:bg-blue-900/10', border: 'border-blue-100 dark:border-blue-900/30', text: 'text-blue-600 dark:text-blue-400', icon: <ClipboardList className="w-5 h-5" />, glow: 'group-hover:shadow-[0_0_15px_rgba(37,99,235,0.15)]' };
+    case 'result': return { bg: 'bg-emerald-50/50 dark:bg-emerald-900/10', border: 'border-emerald-100 dark:border-emerald-900/30', text: 'text-emerald-600 dark:text-emerald-400', icon: <CheckCircle2 className="w-5 h-5" />, glow: 'group-hover:shadow-[0_0_15px_rgba(16,185,129,0.15)]' };
+    default: return { bg: 'bg-gray-50/50 dark:bg-gray-800/20', border: 'border-gray-200/50 dark:border-gray-700/30', text: 'text-gray-600 dark:text-gray-300', icon: <Info className="w-5 h-5" />, glow: 'group-hover:shadow-[0_0_15px_rgba(156,163,175,0.15)]' };
   }
 };
 
 const EventRow = ({ event, index }) => {
-  const [isVisible, setIsVisible] = useState(false);
   const styles = getTypeStyles(event.type);
   
-  useEffect(() => {
-    // Staggered fade in animation
-    const timer = setTimeout(() => setIsVisible(true), 50 + (index * 30));
-    return () => clearTimeout(timer);
-  }, [index, event]);
-
   return (
-    <div className={`transition-all duration-500 ease-out transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
-      <div className={`group flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 mb-3 rounded-xl border transition-all duration-300 shadow-sm hover:shadow-md ${styles.bg} ${styles.border} hover:-translate-y-0.5 cursor-default`}>
+    <motion.div 
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 20 }}
+      transition={{ delay: index * 0.05, type: 'spring', stiffness: 100 }}
+    >
+      <div className={`group flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 mb-4 rounded-2xl border transition-all duration-300 backdrop-blur-sm hover:scale-[1.01] cursor-default ${styles.bg} ${styles.border} ${styles.glow}`}>
         <div className="flex items-start space-x-4 w-full">
-          <div className={`p-2.5 rounded-lg bg-white dark:bg-gray-900 shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 ${styles.text}`}>
+          <div className={`p-3 rounded-xl bg-white dark:bg-[#111827] shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 ${styles.text}`}>
             {styles.icon}
           </div>
           <div className="flex-grow">
-            <h4 className={`text-[1.05rem] font-bold group-hover:text-black dark:group-hover:text-white transition-colors ${styles.text}`}>{event.name}</h4>
-            <div className="flex flex-col sm:flex-row sm:items-center text-sm font-medium text-gray-700 dark:text-gray-400 mt-1.5 space-y-1 sm:space-y-0 sm:space-x-2">
-              <span className="bg-white dark:bg-gray-800 px-2.5 py-1 rounded-md shadow-sm border border-black/5 dark:border-white/5">{event.start}</span>
+            <h4 className={`text-lg font-bold group-hover:text-gray-900 dark:group-hover:text-white transition-colors ${styles.text}`}>{event.name}</h4>
+            <div className="flex flex-col sm:flex-row sm:items-center text-sm font-semibold text-gray-500 dark:text-gray-400 mt-2 space-y-2 sm:space-y-0 sm:space-x-3">
+              <span className="bg-white/80 dark:bg-gray-800/80 px-3 py-1.5 rounded-lg shadow-sm border border-black/5 dark:border-white/5 backdrop-blur-md">{event.start}</span>
               {event.end && (
                 <>
-                  <ChevronRight className="hidden sm:block w-4 h-4 text-gray-400 dark:text-gray-500" />
-                  <span className="bg-white dark:bg-gray-800 px-2.5 py-1 rounded-md shadow-sm border border-black/5 dark:border-white/5">{event.end}</span>
+                  <ChevronRight className="hidden sm:block w-4 h-4 text-gray-400 opacity-50" />
+                  <span className="bg-white/80 dark:bg-gray-800/80 px-3 py-1.5 rounded-lg shadow-sm border border-black/5 dark:border-white/5 backdrop-blur-md">{event.end}</span>
                 </>
               )}
             </div>
           </div>
         </div>
-        <div className={`hidden lg:block uppercase text-[0.65rem] font-bold tracking-[0.2em] px-3 py-1.5 rounded-full bg-white dark:bg-gray-800 shadow-sm mt-4 sm:mt-0 whitespace-nowrap opacity-80 group-hover:opacity-100 transition-opacity ${styles.text}`}>
+        <div className={`hidden lg:block uppercase text-[0.65rem] font-extrabold tracking-[0.2em] px-4 py-2 rounded-full bg-white dark:bg-[#111827] shadow-sm mt-4 sm:mt-0 whitespace-nowrap opacity-70 group-hover:opacity-100 transition-opacity ${styles.text}`}>
           {event.type}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -131,92 +130,142 @@ const Calendar = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-10 min-h-screen">
+    <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-12 min-h-screen">
       
       {/* Header */}
-      <div className="text-center animate-fade-in">
-        <div className="inline-flex items-center justify-center p-4 bg-iitm-blue text-white rounded-2xl mb-6 shadow-xl transform hover:scale-105 transition-transform duration-300">
+      <motion.div 
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="text-center"
+      >
+        <motion.div 
+          whileHover={{ scale: 1.05, rotate: -5 }}
+          className="inline-flex items-center justify-center p-4 bg-gradient-to-br from-indigo-500 to-violet-600 text-white rounded-2xl mb-6 shadow-[0_0_40px_rgba(99,102,241,0.4)]"
+        >
           <CalendarDays className="w-10 h-10" />
-        </div>
-        <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl tracking-tight">
+        </motion.div>
+        <h1 className="text-4xl font-black text-gray-900 dark:text-white sm:text-5xl tracking-tight mb-4">
           Detailed Academic Calendar
         </h1>
-        <p className="mt-4 text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto font-medium">
           Comprehensive schedules, precisely mapped from the official academic calendars.
         </p>
-      </div>
+      </motion.div>
 
       {/* Tabs */}
-      <div className="flex justify-center flex-wrap gap-2 md:gap-4 border-b border-gray-200 dark:border-gray-800 pb-4">
+      <div className="flex justify-center flex-wrap gap-3 md:gap-4">
         {tabs.map(tab => (
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-3 rounded-full text-sm sm:text-base font-bold transition-all duration-300 ${
+            className={`px-6 py-3 rounded-full text-sm sm:text-base font-bold transition-colors ${
               activeTab === tab.id
-                ? 'bg-iitm-blue text-white shadow-lg scale-105'
-                : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 hover:scale-105'
+                ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
+                : 'bg-white/80 dark:bg-gray-800/80 text-gray-600 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-md'
             }`}
           >
             {tab.label}
-          </button>
+          </motion.button>
         ))}
       </div>
 
       {/* Content Area */}
-      <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-800 p-6 sm:p-10 min-h-[500px]">
-        {activeTab === 'sep2026' && (
-          <div className="space-y-14 animate-fade-in">
-            <section>
-              <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-6 border-l-4 pl-4 border-purple-500">For Term Students</h2>
-              <div className="space-y-1">
-                {sep2026Data.term.map((event, idx) => <EventRow key={`term-${idx}`} event={event} index={idx} />)}
+      <motion.div 
+        layout
+        className="bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl rounded-[32px] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] border border-gray-200/50 dark:border-white/5 p-6 sm:p-12 min-h-[500px]"
+      >
+        <AnimatePresence mode="wait">
+          {activeTab === 'sep2026' && (
+            <motion.div 
+              key="sep2026"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="space-y-16"
+            >
+              <section>
+                <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
+                  <span className="w-2 h-8 rounded-full bg-violet-500"></span> For Term Students
+                </h2>
+                <div>
+                  {sep2026Data.term.map((event, idx) => <EventRow key={`term-${idx}`} event={event} index={idx} />)}
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
+                  <span className="w-2 h-8 rounded-full bg-blue-500"></span> For Qualifier Students
+                </h2>
+                <div>
+                  {sep2026Data.qualifier.map((event, idx) => <EventRow key={`qual-${idx}`} event={event} index={idx} />)}
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
+                  <span className="w-2 h-8 rounded-full bg-emerald-500"></span> For DAD Qualifier Students
+                </h2>
+                <div>
+                  {sep2026Data.dad.map((event, idx) => <EventRow key={`dad-${idx}`} event={event} index={idx} />)}
+                </div>
+              </section>
+            </motion.div>
+          )}
+
+          {activeTab === 'jan2027' && (
+            <motion.div 
+              key="jan2027"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="space-y-8"
+            >
+              <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
+                <span className="w-2 h-8 rounded-full bg-indigo-500"></span> For Term Students (Jan 2027)
+              </h2>
+              <div>
+                {futureTermsData.jan2027.map((event, idx) => <EventRow key={`jan-${idx}`} event={event} index={idx} />)}
               </div>
-            </section>
+            </motion.div>
+          )}
 
-            <section>
-              <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-6 border-l-4 pl-4 border-blue-500">For Qualifier Students</h2>
-              <div className="space-y-1">
-                {sep2026Data.qualifier.map((event, idx) => <EventRow key={`qual-${idx}`} event={event} index={idx} />)}
+          {activeTab === 'may2027' && (
+            <motion.div 
+              key="may2027"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="space-y-8"
+            >
+              <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
+                <span className="w-2 h-8 rounded-full bg-emerald-500"></span> For Term Students (May 2027)
+              </h2>
+              <div>
+                {futureTermsData.may2027.map((event, idx) => <EventRow key={`may-${idx}`} event={event} index={idx} />)}
               </div>
-            </section>
+            </motion.div>
+          )}
 
-            <section>
-              <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-6 border-l-4 pl-4 border-green-500">For DAD Qualifier Students</h2>
-              <div className="space-y-1">
-                {sep2026Data.dad.map((event, idx) => <EventRow key={`dad-${idx}`} event={event} index={idx} />)}
+          {activeTab === 'sep2027' && (
+            <motion.div 
+              key="sep2027"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="space-y-8"
+            >
+              <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
+                <span className="w-2 h-8 rounded-full bg-orange-500"></span> For Term Students (Sep 2027)
+              </h2>
+              <div>
+                {futureTermsData.sep2027.map((event, idx) => <EventRow key={`sep27-${idx}`} event={event} index={idx} />)}
               </div>
-            </section>
-          </div>
-        )}
-
-        {activeTab === 'jan2027' && (
-          <div className="space-y-6 animate-fade-in">
-            <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-6 border-l-4 pl-4 border-indigo-500">For Term Students (Jan 2027)</h2>
-            <div className="space-y-1">
-              {futureTermsData.jan2027.map((event, idx) => <EventRow key={`jan-${idx}`} event={event} index={idx} />)}
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'may2027' && (
-          <div className="space-y-6 animate-fade-in">
-            <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-6 border-l-4 pl-4 border-emerald-500">For Term Students (May 2027)</h2>
-            <div className="space-y-1">
-              {futureTermsData.may2027.map((event, idx) => <EventRow key={`may-${idx}`} event={event} index={idx} />)}
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'sep2027' && (
-          <div className="space-y-6 animate-fade-in">
-            <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-6 border-l-4 pl-4 border-orange-500">For Term Students (Sep 2027)</h2>
-            <div className="space-y-1">
-              {futureTermsData.sep2027.map((event, idx) => <EventRow key={`sep27-${idx}`} event={event} index={idx} />)}
-            </div>
-          </div>
-        )}
-      </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
 
     </div>
   );

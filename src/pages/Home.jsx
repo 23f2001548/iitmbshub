@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Calculator, FileText, Link as LinkIcon, Info, LayoutDashboard, MessageSquare, Headset, ExternalLink, BarChart, ClipboardCheck, Users, CalendarDays, BookOpen, Video } from 'lucide-react';
 
 const externalPortals = [
@@ -163,162 +164,123 @@ const channelsToSubscribe = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 100 } }
+};
+
+const CardLink = ({ item, isInternal }) => {
+  const content = (
+    <motion.div
+      variants={itemVariants}
+      whileHover={{ y: -5, scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className="bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl rounded-[24px] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] border border-gray-200/50 dark:border-white/5 p-6 flex flex-col group relative overflow-hidden h-full"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/0 dark:from-white/5 dark:to-transparent pointer-events-none" />
+      <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+        {!isInternal && <ExternalLink className="w-5 h-5 text-indigo-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-300" />}
+      </div>
+      <div className={`p-3 rounded-2xl inline-flex w-fit mb-4 ${item.color} shadow-inner`}>
+        <item.icon className="w-6 h-6" />
+      </div>
+      <h3 className="text-xl font-extrabold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors pr-8 mb-2 tracking-tight">
+        {item.name}
+      </h3>
+      <p className="text-sm text-gray-600 dark:text-gray-300 flex-grow leading-relaxed font-medium">
+        {item.description}
+      </p>
+    </motion.div>
+  );
+
+  return isInternal ? (
+    <Link to={item.path} className="block h-full outline-none">{content}</Link>
+  ) : (
+    <a href={item.url} target="_blank" rel="noopener noreferrer" className="block h-full outline-none">{content}</a>
+  );
+};
+
+const Section = ({ title, items, isInternal = false }) => (
+  <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+    <motion.h2 
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      className="text-3xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight"
+    >
+      {title}
+    </motion.h2>
+    <motion.div 
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+    >
+      {items.map((item) => (
+        <CardLink key={item.name} item={item} isInternal={isInternal} />
+      ))}
+    </motion.div>
+  </section>
+);
+
 const Home = () => {
   return (
-    <div className="flex flex-col space-y-12 pb-12 transition-colors duration-300">
+    <div className="flex flex-col space-y-24 pb-24 transition-colors duration-300 bg-[#f8fafc] dark:bg-[#0a0f1a] overflow-hidden">
       {/* Hero Section */}
-      <section className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-800 pt-16 pb-20 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden transition-colors duration-300">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-50/50 dark:to-gray-900/50 pointer-events-none" />
-        <div className="relative z-10 animate-fade-in-up">
-          <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
-            <span className="block">Welcome to</span>
-            <span className="block text-iitm-blue dark:text-blue-300 mt-2">IITM BS Hub</span>
-          </h1>
-          <p className="mt-5 max-w-md mx-auto text-base text-gray-500 dark:text-gray-300 sm:text-lg md:mt-8 md:text-xl md:max-w-3xl">
-            Your all-in-one companion for the IIT Madras BS Degree program. Access tools, resources, and community links in one place.
-          </p>
+      <section className="relative pt-32 pb-24 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center min-h-[60vh]">
+        {/* Background glow effects */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/20 dark:bg-indigo-600/20 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-violet-500/20 dark:bg-violet-600/20 rounded-full blur-[100px] pointer-events-none" />
+        
+        <div className="relative z-10">
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 dark:bg-[#111827]/50 backdrop-blur-md border border-gray-200/50 dark:border-white/5 mb-8 shadow-sm"
+          >
+            <span className="flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+            <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Your All-in-One Companion</span>
+          </motion.div>
+
+          <motion.h1 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-5xl tracking-tighter font-black text-gray-900 dark:text-white sm:text-6xl md:text-7xl lg:text-8xl"
+          >
+            <span className="block mb-2">Welcome to</span>
+            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-violet-500 to-cyan-500 dark:from-indigo-400 dark:via-violet-400 dark:to-cyan-400">
+              IITM BS Hub
+            </span>
+          </motion.h1>
+
+          <motion.p 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="mt-8 max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300 sm:text-xl font-medium leading-relaxed"
+          >
+            Access tools, resources, and community links in one place. Engineered for the IIT Madras BS Degree program students.
+          </motion.p>
         </div>
       </section>
 
-      {/* Essential Portals Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full animate-fade-in">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Essential Portals</h2>
-        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {externalPortals.map((portal) => (
-            <a
-              key={portal.name}
-              href={portal.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg hover:border-iitm-light-blue dark:hover:border-iitm-blue transition-all duration-300 hover:-translate-y-1 flex flex-col group relative"
-            >
-              <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue" />
-              </div>
-              <div className={`p-3 rounded-xl inline-flex w-fit mb-4 ${portal.color} dark:bg-opacity-20`}>
-                <portal.icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue transition-colors pr-8">
-                {portal.name}
-              </h3>
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 flex-grow leading-relaxed">
-                {portal.description}
-              </p>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      {/* Features Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full animate-fade-in">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Quick Access</h2>
-        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature) => (
-            <Link
-              key={feature.name}
-              to={feature.path}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg hover:border-iitm-light-blue dark:hover:border-iitm-blue transition-all duration-300 hover:-translate-y-1 flex flex-col group"
-            >
-              <div className={`p-3 rounded-xl inline-flex w-fit mb-4 ${feature.color} dark:bg-opacity-20`}>
-                <feature.icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue transition-colors">
-                {feature.name}
-              </h3>
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 flex-grow leading-relaxed">
-                {feature.description}
-              </p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Resources and Notes */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full animate-fade-in">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Resources and Notes</h2>
-        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {resourcesAndNotes.map((resource) => (
-            <a
-              key={resource.name}
-              href={resource.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg hover:border-iitm-light-blue dark:hover:border-iitm-blue transition-all duration-300 hover:-translate-y-1 flex flex-col group relative"
-            >
-              <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue" />
-              </div>
-              <div className={`p-3 rounded-xl inline-flex w-fit mb-4 ${resource.color} dark:bg-opacity-20`}>
-                <resource.icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue transition-colors pr-8">
-                {resource.name}
-              </h3>
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 flex-grow leading-relaxed">
-                {resource.description}
-              </p>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      {/* PYQs and Mock Tests */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full animate-fade-in">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">PYQs and Mock Tests</h2>
-        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {pyqsAndMockTests.map((item) => (
-            <a
-              key={item.name}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg hover:border-iitm-light-blue dark:hover:border-iitm-blue transition-all duration-300 hover:-translate-y-1 flex flex-col group relative"
-            >
-              <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue" />
-              </div>
-              <div className={`p-3 rounded-xl inline-flex w-fit mb-4 ${item.color} dark:bg-opacity-20`}>
-                <item.icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue transition-colors pr-8">
-                {item.name}
-              </h3>
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 flex-grow leading-relaxed">
-                {item.description}
-              </p>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      {/* Channels you must subscribe */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full animate-fade-in">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Channels you must subscribe</h2>
-        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {channelsToSubscribe.map((channel) => (
-            <a
-              key={channel.name}
-              href={channel.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg hover:border-iitm-light-blue dark:hover:border-iitm-blue transition-all duration-300 hover:-translate-y-1 flex flex-col group relative"
-            >
-              <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue" />
-              </div>
-              <div className={`p-3 rounded-xl inline-flex w-fit mb-4 ${channel.color} dark:bg-opacity-20`}>
-                <channel.icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-iitm-blue dark:group-hover:text-iitm-light-blue transition-colors pr-8">
-                {channel.name}
-              </h3>
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 flex-grow leading-relaxed">
-                {channel.description}
-              </p>
-            </a>
-          ))}
-        </div>
-      </section>
+      <Section title="Essential Portals" items={externalPortals} />
+      <Section title="Quick Access" items={features} isInternal={true} />
+      <Section title="Resources and Notes" items={resourcesAndNotes} />
+      <Section title="PYQs and Mock Tests" items={pyqsAndMockTests} />
+      <Section title="Channels to Subscribe" items={channelsToSubscribe} />
+      
     </div>
   );
 };
