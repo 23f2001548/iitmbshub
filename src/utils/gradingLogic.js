@@ -236,6 +236,15 @@ export const coursesConfig = {
         const { gaa = 0, qz1 = 0, qz2 = 0, f = 0 } = vals;
         return 0.05 * gaa + Math.max(0.6 * f + 0.25 * Math.max(qz1, qz2), 0.4 * f + 0.25 * qz1 + 0.3 * qz2);
       }
+    },
+    {
+      id: 'dlgenai',
+      name: 'Introduction to Deep Learning and Generative AI',
+      components: [GAA, QZ1, QZ2, NPPE1, NPPE2, F],
+      calculate: (vals) => {
+        const { gaa = 0, qz1 = 0, qz2 = 0, nppe1 = 0, nppe2 = 0, f = 0 } = vals;
+        return 0.1 * gaa + 0.2 * qz1 + 0.2 * qz2 + 0.25 * f + 0.1 * nppe1 + 0.15 * nppe2;
+      }
     }
   ],
   Degree: [
@@ -470,15 +479,6 @@ export const coursesConfig = {
       calculate: (vals) => {
         const { gaa = 0, qz1 = 0, qz2 = 0, f = 0 } = vals;
         return 0.1 * gaa + 0.4 * f + 0.25 * qz1 + 0.25 * qz2;
-      }
-    },
-    {
-      id: 'dlgenai',
-      name: 'Introduction to Deep Learning and Generative AI',
-      components: [GAA, QZ1, QZ2, NPPE1, NPPE2, F],
-      calculate: (vals) => {
-        const { gaa = 0, qz1 = 0, qz2 = 0, nppe1 = 0, nppe2 = 0, f = 0 } = vals;
-        return 0.1 * gaa + 0.2 * qz1 + 0.2 * qz2 + 0.25 * f + 0.1 * nppe1 + 0.15 * nppe2;
       }
     }
   ]
