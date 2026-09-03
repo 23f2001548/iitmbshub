@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calculator, Award, ArrowRight, BookOpen } from 'lucide-react';
+import { Calculator, Award, BookOpen } from 'lucide-react';
 import { coursesConfig, getLetterGrade } from '../utils/gradingLogic';
 
 const gradeColors = {
-  S: 'from-emerald-400 to-emerald-600',
-  A: 'from-emerald-400 to-emerald-600',
-  B: 'from-blue-400 to-indigo-600',
-  C: 'from-amber-400 to-orange-500',
-  D: 'from-orange-400 to-red-500',
-  E: 'from-red-500 to-rose-700',
-  U: 'from-gray-600 to-gray-800'
+  S: 'bg-[#00E676] text-black border-black',
+  A: 'bg-[#00E676] text-black border-black',
+  B: 'bg-[#0047FF] text-white border-black',
+  C: 'bg-[#FFEA00] text-black border-black',
+  D: 'bg-[#FF2E00] text-white border-black',
+  E: 'bg-[#FF2E00] text-white border-black',
+  U: 'bg-black text-white border-black dark:bg-white dark:text-black'
 };
 
 const GradePredictor = () => {
@@ -19,13 +19,11 @@ const GradePredictor = () => {
   const [scores, setScores] = useState({});
   const [result, setResult] = useState({ score: 0, grade: 'U' });
 
-  // Handle level change
   useEffect(() => {
     const firstCourse = coursesConfig[level][0];
     setCourse(firstCourse);
   }, [level]);
 
-  // Reset scores when course changes
   useEffect(() => {
     const initialScores = {};
     course.components.forEach(comp => {
@@ -34,7 +32,6 @@ const GradePredictor = () => {
     setScores(initialScores);
   }, [course]);
 
-  // Calculate results on score change
   useEffect(() => {
     const coercedScores = {};
     for (const key in scores) {
@@ -53,23 +50,20 @@ const GradePredictor = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 min-h-screen">
+    <div className="max-w-[1400px] mx-auto px-4 py-16 sm:px-6 lg:px-8 min-h-screen bg-[#F4F4F0] dark:bg-[#0B0B0B]">
       <motion.div 
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="text-center mb-16"
+        className="mb-16"
       >
-        <motion.div 
-          whileHover={{ scale: 1.05, rotate: 5 }}
-          className="inline-flex items-center justify-center p-4 bg-gradient-to-br from-indigo-500 to-violet-600 text-white rounded-2xl mb-6 shadow-[0_0_40px_rgba(99,102,241,0.4)]"
-        >
-          <Calculator className="w-10 h-10" />
-        </motion.div>
-        <h1 className="text-4xl font-black text-gray-900 dark:text-white sm:text-5xl md:text-6xl tracking-tight mb-4">
-          Grade Predictor
+        <div className="inline-flex items-center justify-center p-4 bg-[#0047FF] text-white border-2 border-black mb-6">
+          <Calculator className="w-10 h-10" strokeWidth={2.5} />
+        </div>
+        <h1 className="font-display text-5xl font-black text-black dark:text-white sm:text-6xl md:text-7xl tracking-tighter uppercase mb-4">
+          Grade <br/> Predictor.
         </h1>
-        <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto font-medium">
-          Accurately forecast your final course grade by experimenting with different score scenarios across all components.
+        <p className="font-sans text-lg text-black/70 dark:text-white/70 max-w-2xl font-medium leading-relaxed">
+          Forecast your final course grade by experimenting with different score scenarios. No magic, just math.
         </p>
       </motion.div>
 
@@ -83,32 +77,30 @@ const GradePredictor = () => {
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl rounded-[24px] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] border border-gray-200/50 dark:border-white/5 p-8"
+            className="bg-white dark:bg-[#1A1A1A] border-2 border-black dark:border-white/20 p-8 shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#FFF]"
           >
-            <h2 className="text-xl font-extrabold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
-              <BookOpen className="w-6 h-6 text-indigo-500" /> Select Level
+            <h2 className="font-display text-2xl font-black uppercase text-black dark:text-white mb-6 flex items-center gap-3">
+              <BookOpen className="w-6 h-6 text-[#0047FF]" /> Select Level
             </h2>
             <div className="flex flex-wrap gap-3">
               {Object.keys(coursesConfig).map((lvl) => (
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                <button
                   key={lvl}
                   onClick={() => setLevel(lvl)}
-                  className={`px-6 py-3 rounded-full text-sm font-bold transition-colors ${
+                  className={`px-6 py-3 font-mono text-sm uppercase font-bold tracking-widest border-2 transition-colors ${
                     level === lvl
-                      ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
-                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                      ? 'bg-[#0047FF] text-white border-black dark:border-[#0047FF]'
+                      : 'bg-[#F4F4F0] dark:bg-[#0B0B0B] text-black dark:text-white border-black dark:border-white/20 hover:bg-[#0047FF] hover:text-white hover:border-black'
                   }`}
                 >
                   {lvl}
-                </motion.button>
+                </button>
               ))}
             </div>
 
             {/* Course Selector */}
             <div className="mt-8">
-              <label htmlFor="course-select" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+              <label htmlFor="course-select" className="block font-mono text-xs uppercase tracking-widest font-bold text-black dark:text-white mb-3">
                 Select Course
               </label>
               <select
@@ -118,7 +110,7 @@ const GradePredictor = () => {
                   const selected = coursesConfig[level].find(c => c.id === e.target.value);
                   setCourse(selected);
                 }}
-                className="block w-full pl-4 pr-10 py-4 text-base border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent rounded-2xl shadow-sm bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-white font-medium appearance-none cursor-pointer"
+                className="block w-full pl-4 pr-10 py-4 text-base border-2 border-black dark:border-white/20 bg-[#F4F4F0] dark:bg-[#0B0B0B] text-black dark:text-white font-mono font-bold appearance-none cursor-pointer focus:outline-none focus:border-[#0047FF] transition-colors"
               >
                 {coursesConfig[level].map((c) => (
                   <option key={c.id} value={c.id}>{c.name}</option>
@@ -132,10 +124,10 @@ const GradePredictor = () => {
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl rounded-[24px] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] border border-gray-200/50 dark:border-white/5 p-8"
+            className="bg-white dark:bg-[#1A1A1A] border-2 border-black dark:border-white/20 p-8 shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#FFF]"
           >
-            <h2 className="text-xl font-extrabold text-gray-900 dark:text-white mb-8 border-l-4 border-indigo-500 pl-4 rounded-sm">
-              Enter Your Scores
+            <h2 className="font-display text-2xl font-black uppercase text-black dark:text-white mb-8 border-l-8 border-[#0047FF] pl-4">
+              Enter Scores
             </h2>
             <div className="space-y-8">
               <AnimatePresence mode="popLayout">
@@ -149,8 +141,8 @@ const GradePredictor = () => {
                     className="relative"
                   >
                     <div className="flex justify-between items-center mb-3">
-                      <label className="text-sm font-bold text-gray-700 dark:text-gray-200">{comp.label}</label>
-                      <div className="flex items-center space-x-2 bg-indigo-50 dark:bg-indigo-500/10 px-3 py-1.5 rounded-xl border border-indigo-100 dark:border-indigo-500/20">
+                      <label className="font-mono text-sm font-bold uppercase tracking-wide text-black dark:text-white">{comp.label}</label>
+                      <div className="flex items-center space-x-2 bg-[#F4F4F0] dark:bg-[#0B0B0B] px-3 py-2 border-2 border-black dark:border-white/20">
                         <input
                           type="number"
                           min="0"
@@ -165,10 +157,10 @@ const GradePredictor = () => {
                             }
                             handleScoreChange(comp.id, val);
                           }}
-                          className="w-16 text-right bg-transparent font-bold text-indigo-600 dark:text-indigo-400 focus:outline-none placeholder-indigo-300"
+                          className="w-16 text-right bg-transparent font-mono font-black text-xl text-[#0047FF] focus:outline-none placeholder-black/20 dark:placeholder-white/20"
                           placeholder="0"
                         />
-                        <span className="text-sm font-bold text-indigo-400 dark:text-indigo-500/50">
+                        <span className="font-mono text-sm font-bold text-black/50 dark:text-white/50">
                           / {comp.max}
                         </span>
                       </div>
@@ -180,10 +172,10 @@ const GradePredictor = () => {
                         max={comp.max}
                         value={scores[comp.id] || 0}
                         onChange={(e) => handleScoreChange(comp.id, Number(e.target.value))}
-                        className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full appearance-none cursor-pointer accent-indigo-600 dark:accent-indigo-400 transition-all hover:h-3"
+                        className="w-full h-2 bg-black dark:bg-white/20 appearance-none cursor-pointer accent-[#0047FF] transition-all hover:h-4"
                       />
                     </div>
-                    <div className="flex justify-between text-xs text-gray-400 dark:text-gray-500 mt-2 px-1 font-semibold">
+                    <div className="flex justify-between font-mono text-xs font-bold text-black/50 dark:text-white/50 mt-2 px-1">
                       <span>0</span>
                       <span>{comp.max}</span>
                     </div>
@@ -201,44 +193,40 @@ const GradePredictor = () => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <div className={`rounded-[32px] shadow-2xl p-8 bg-gradient-to-br ${gradeColors[result.grade]} sticky top-28 transition-colors duration-500 border border-white/20`}>
+          <div className={`p-8 border-4 sticky top-28 transition-colors duration-300 shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#FFF] ${gradeColors[result.grade]}`}>
             <div className="flex justify-between items-start mb-8">
               <div>
-                <h3 className="text-lg font-bold opacity-90 text-white">Predicted Grade</h3>
-                <p className="text-sm opacity-80 mt-1 text-white font-medium">{course.name}</p>
+                <h3 className="font-mono text-sm uppercase tracking-widest font-bold opacity-90">Predicted Grade</h3>
+                <p className="font-sans text-sm opacity-80 mt-1 font-bold">{course.name}</p>
               </div>
-              <motion.div 
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className="p-3 bg-white/20 rounded-2xl backdrop-blur-sm border border-white/30"
-              >
-                <Award className="w-8 h-8 text-white" />
-              </motion.div>
+              <div className="p-3 bg-black/10 border-2 border-black">
+                <Award className="w-8 h-8" />
+              </div>
             </div>
 
-            <div className="text-center my-12">
+            <div className="text-center my-16">
               <motion.div 
                 key={result.grade}
-                initial={{ scale: 0.5, opacity: 0 }}
+                initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", bounce: 0.5 }}
-                className="text-8xl font-black tracking-tighter mb-4 drop-shadow-[0_10px_20px_rgba(0,0,0,0.2)] text-white"
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                className="font-display text-[10rem] leading-none font-black tracking-tighter mb-4"
               >
                 {result.grade}
               </motion.div>
-              <div className="text-2xl font-bold opacity-90 text-white">
-                Score: {result.score.toFixed(2)}
+              <div className="font-mono text-3xl font-black opacity-90">
+                SCORE: {result.score.toFixed(2)}
               </div>
             </div>
 
-            <div className="mt-12 bg-black/10 rounded-[20px] p-6 backdrop-blur-md border border-white/10">
-              <div className="flex items-center justify-between text-sm text-white">
-                <span className="opacity-90 font-medium">Minimum for S grade:</span>
-                <span className="font-bold">90.00</span>
+            <div className="mt-12 bg-white/20 border-2 border-black p-6">
+              <div className="flex items-center justify-between font-mono text-sm font-bold uppercase">
+                <span className="opacity-90">Minimum for S:</span>
+                <span>90.00</span>
               </div>
-              <div className="flex items-center justify-between text-sm mt-4 text-white">
-                <span className="opacity-90 font-medium">Minimum to pass (E):</span>
-                <span className="font-bold">40.00</span>
+              <div className="flex items-center justify-between font-mono text-sm font-bold uppercase mt-4">
+                <span className="opacity-90">Minimum to Pass:</span>
+                <span>40.00</span>
               </div>
             </div>
           </div>

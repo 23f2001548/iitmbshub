@@ -4,6 +4,8 @@ Your all-in-one companion for the **IIT Madras BS Degree** program. Access tools
 
 Built with **React + Vite + TailwindCSS**.
 
+> **Note:** Recently overhauled with a strict **Premium Consumer + Brutalist** aesthetic using `@taste-skill` and `@impeccable`.
+
 ---
 
 ## 🚀 Features
@@ -50,6 +52,7 @@ Quick links to official IITM platforms:
 |----------|-------------|------|
 | **PYQ Platform – Shine in Exams!** by Ashish Maurya | Collection of previous year questions and practice materials | [Visit](https://mauryahub.onrender.com/) |
 | **QuizPractice Space** by SALMANUL FARIS | Recommended for all your quizzes practice | [Visit](https://quizpractice.space/) |
+| **OPPE Practice** | Practice platform for OPPE | [Visit](https://oppe.rangalabs.cloud) |
 
 ---
 

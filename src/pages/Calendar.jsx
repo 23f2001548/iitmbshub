@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CalendarDays, CheckCircle2, Info, Edit3, ClipboardList, ChevronRight } from 'lucide-react';
 
@@ -76,10 +76,10 @@ const futureTermsData = {
 
 const getTypeStyles = (type) => {
   switch (type) {
-    case 'exam': return { bg: 'bg-rose-50/50 dark:bg-rose-900/10', border: 'border-rose-100 dark:border-rose-900/30', text: 'text-rose-600 dark:text-rose-400', icon: <Edit3 className="w-5 h-5" />, glow: 'group-hover:shadow-[0_0_15px_rgba(225,29,72,0.15)]' };
-    case 'registration': return { bg: 'bg-blue-50/50 dark:bg-blue-900/10', border: 'border-blue-100 dark:border-blue-900/30', text: 'text-blue-600 dark:text-blue-400', icon: <ClipboardList className="w-5 h-5" />, glow: 'group-hover:shadow-[0_0_15px_rgba(37,99,235,0.15)]' };
-    case 'result': return { bg: 'bg-emerald-50/50 dark:bg-emerald-900/10', border: 'border-emerald-100 dark:border-emerald-900/30', text: 'text-emerald-600 dark:text-emerald-400', icon: <CheckCircle2 className="w-5 h-5" />, glow: 'group-hover:shadow-[0_0_15px_rgba(16,185,129,0.15)]' };
-    default: return { bg: 'bg-gray-50/50 dark:bg-gray-800/20', border: 'border-gray-200/50 dark:border-gray-700/30', text: 'text-gray-600 dark:text-gray-300', icon: <Info className="w-5 h-5" />, glow: 'group-hover:shadow-[0_0_15px_rgba(156,163,175,0.15)]' };
+    case 'exam': return { bg: 'bg-[#FF2E00]', text: 'text-white', icon: <Edit3 className="w-5 h-5" /> };
+    case 'registration': return { bg: 'bg-[#0047FF]', text: 'text-white', icon: <ClipboardList className="w-5 h-5" /> };
+    case 'result': return { bg: 'bg-[#00E676]', text: 'text-black', icon: <CheckCircle2 className="w-5 h-5" /> };
+    default: return { bg: 'bg-black dark:bg-white', text: 'text-white dark:text-black', icon: <Info className="w-5 h-5" /> };
   }
 };
 
@@ -91,27 +91,28 @@ const EventRow = ({ event, index }) => {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 20 }}
-      transition={{ delay: index * 0.05, type: 'spring', stiffness: 100 }}
+      transition={{ delay: index * 0.02, type: 'spring', stiffness: 400, damping: 25 }}
+      className="mb-4"
     >
-      <div className={`group flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 mb-4 rounded-2xl border transition-all duration-300 backdrop-blur-sm hover:scale-[1.01] cursor-default ${styles.bg} ${styles.border} ${styles.glow}`}>
-        <div className="flex items-start space-x-4 w-full">
-          <div className={`p-3 rounded-xl bg-white dark:bg-[#111827] shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 ${styles.text}`}>
+      <div className="group flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 bg-white dark:bg-[#1A1A1A] border-2 border-black dark:border-white/20 transition-all duration-150 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[4px_4px_0px_0px_#000] dark:hover:shadow-[4px_4px_0px_0px_#FFF]">
+        <div className="flex items-start space-x-6 w-full">
+          <div className={`p-4 border-2 border-black dark:border-transparent ${styles.bg} ${styles.text}`}>
             {styles.icon}
           </div>
           <div className="flex-grow">
-            <h4 className={`text-lg font-bold group-hover:text-gray-900 dark:group-hover:text-white transition-colors ${styles.text}`}>{event.name}</h4>
-            <div className="flex flex-col sm:flex-row sm:items-center text-sm font-semibold text-gray-500 dark:text-gray-400 mt-2 space-y-2 sm:space-y-0 sm:space-x-3">
-              <span className="bg-white/80 dark:bg-gray-800/80 px-3 py-1.5 rounded-lg shadow-sm border border-black/5 dark:border-white/5 backdrop-blur-md">{event.start}</span>
+            <h4 className="font-display text-2xl font-black uppercase tracking-tight text-black dark:text-white mb-2">{event.name}</h4>
+            <div className="flex flex-col sm:flex-row sm:items-center font-mono text-sm font-bold uppercase tracking-widest text-black/60 dark:text-white/60 mt-2 space-y-2 sm:space-y-0 sm:space-x-3">
+              <span className="bg-[#F4F4F0] dark:bg-[#0B0B0B] px-3 py-1.5 border-2 border-black/10 dark:border-white/10">{event.start}</span>
               {event.end && (
                 <>
-                  <ChevronRight className="hidden sm:block w-4 h-4 text-gray-400 opacity-50" />
-                  <span className="bg-white/80 dark:bg-gray-800/80 px-3 py-1.5 rounded-lg shadow-sm border border-black/5 dark:border-white/5 backdrop-blur-md">{event.end}</span>
+                  <ChevronRight className="hidden sm:block w-4 h-4" />
+                  <span className="bg-[#F4F4F0] dark:bg-[#0B0B0B] px-3 py-1.5 border-2 border-black/10 dark:border-white/10">{event.end}</span>
                 </>
               )}
             </div>
           </div>
         </div>
-        <div className={`hidden lg:block uppercase text-[0.65rem] font-extrabold tracking-[0.2em] px-4 py-2 rounded-full bg-white dark:bg-[#111827] shadow-sm mt-4 sm:mt-0 whitespace-nowrap opacity-70 group-hover:opacity-100 transition-opacity ${styles.text}`}>
+        <div className={`hidden lg:block uppercase font-mono text-xs font-black tracking-widest px-4 py-2 border-2 border-black dark:border-transparent mt-4 sm:mt-0 whitespace-nowrap ${styles.bg} ${styles.text}`}>
           {event.type}
         </div>
       </div>
@@ -130,7 +131,7 @@ const Calendar = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-12 min-h-screen">
+    <div className="max-w-[1400px] mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-16 min-h-screen bg-[#F4F4F0] dark:bg-[#0B0B0B]">
       
       {/* Header */}
       <motion.div 
@@ -138,43 +139,38 @@ const Calendar = () => {
         animate={{ y: 0, opacity: 1 }}
         className="text-center"
       >
-        <motion.div 
-          whileHover={{ scale: 1.05, rotate: -5 }}
-          className="inline-flex items-center justify-center p-4 bg-gradient-to-br from-indigo-500 to-violet-600 text-white rounded-2xl mb-6 shadow-[0_0_40px_rgba(99,102,241,0.4)]"
-        >
-          <CalendarDays className="w-10 h-10" />
-        </motion.div>
-        <h1 className="text-4xl font-black text-gray-900 dark:text-white sm:text-5xl tracking-tight mb-4">
-          Detailed Academic Calendar
+        <div className="inline-flex items-center justify-center p-4 bg-[#0047FF] text-white border-2 border-black mb-6">
+          <CalendarDays className="w-10 h-10" strokeWidth={2.5} />
+        </div>
+        <h1 className="font-display text-5xl font-black text-black dark:text-white sm:text-6xl md:text-8xl tracking-tighter uppercase mb-4 leading-none">
+          Academic <br/> Calendar.
         </h1>
-        <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto font-medium">
-          Comprehensive schedules, precisely mapped from the official academic calendars.
+        <p className="font-sans text-xl text-black/70 dark:text-white/70 max-w-2xl mx-auto font-bold tracking-wide">
+          Comprehensive schedules, precisely mapped.
         </p>
       </motion.div>
 
       {/* Tabs */}
-      <div className="flex justify-center flex-wrap gap-3 md:gap-4">
+      <div className="flex justify-center flex-wrap gap-4">
         {tabs.map(tab => (
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-3 rounded-full text-sm sm:text-base font-bold transition-colors ${
+            className={`px-6 py-4 font-mono text-sm uppercase font-bold tracking-widest border-2 transition-all duration-150 ${
               activeTab === tab.id
-                ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
-                : 'bg-white/80 dark:bg-gray-800/80 text-gray-600 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-md'
+                ? 'bg-[#0047FF] text-white border-black dark:border-[#0047FF]'
+                : 'bg-white dark:bg-[#1A1A1A] text-black dark:text-white border-black dark:border-white/20 hover:bg-[#0047FF] hover:text-white hover:border-black'
             }`}
           >
             {tab.label}
-          </motion.button>
+          </button>
         ))}
       </div>
 
       {/* Content Area */}
       <motion.div 
         layout
-        className="bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl rounded-[32px] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] border border-gray-200/50 dark:border-white/5 p-6 sm:p-12 min-h-[500px]"
+        className="min-h-[500px]"
       >
         <AnimatePresence mode="wait">
           {activeTab === 'sep2026' && (
@@ -183,11 +179,11 @@ const Calendar = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="space-y-16"
+              className="space-y-24"
             >
               <section>
-                <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
-                  <span className="w-2 h-8 rounded-full bg-violet-500"></span> For Term Students
+                <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#0047FF] pl-6">
+                  For Term Students
                 </h2>
                 <div>
                   {sep2026Data.term.map((event, idx) => <EventRow key={`term-${idx}`} event={event} index={idx} />)}
@@ -195,8 +191,8 @@ const Calendar = () => {
               </section>
 
               <section>
-                <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
-                  <span className="w-2 h-8 rounded-full bg-blue-500"></span> For Qualifier Students
+                <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#00E676] pl-6">
+                  For Qualifier Students
                 </h2>
                 <div>
                   {sep2026Data.qualifier.map((event, idx) => <EventRow key={`qual-${idx}`} event={event} index={idx} />)}
@@ -204,8 +200,8 @@ const Calendar = () => {
               </section>
 
               <section>
-                <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
-                  <span className="w-2 h-8 rounded-full bg-emerald-500"></span> For DAD Qualifier Students
+                <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#FF2E00] pl-6">
+                  For DAD Qualifier
                 </h2>
                 <div>
                   {sep2026Data.dad.map((event, idx) => <EventRow key={`dad-${idx}`} event={event} index={idx} />)}
@@ -222,8 +218,8 @@ const Calendar = () => {
               exit={{ opacity: 0, y: -20 }}
               className="space-y-8"
             >
-              <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
-                <span className="w-2 h-8 rounded-full bg-indigo-500"></span> For Term Students (Jan 2027)
+              <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#0047FF] pl-6">
+                Term Students (Jan 2027)
               </h2>
               <div>
                 {futureTermsData.jan2027.map((event, idx) => <EventRow key={`jan-${idx}`} event={event} index={idx} />)}
@@ -239,8 +235,8 @@ const Calendar = () => {
               exit={{ opacity: 0, y: -20 }}
               className="space-y-8"
             >
-              <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
-                <span className="w-2 h-8 rounded-full bg-emerald-500"></span> For Term Students (May 2027)
+              <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#0047FF] pl-6">
+                Term Students (May 2027)
               </h2>
               <div>
                 {futureTermsData.may2027.map((event, idx) => <EventRow key={`may-${idx}`} event={event} index={idx} />)}
@@ -256,8 +252,8 @@ const Calendar = () => {
               exit={{ opacity: 0, y: -20 }}
               className="space-y-8"
             >
-              <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-4">
-                <span className="w-2 h-8 rounded-full bg-orange-500"></span> For Term Students (Sep 2027)
+              <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#0047FF] pl-6">
+                Term Students (Sep 2027)
               </h2>
               <div>
                 {futureTermsData.sep2027.map((event, idx) => <EventRow key={`sep27-${idx}`} event={event} index={idx} />)}
