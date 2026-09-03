@@ -30,7 +30,7 @@ Quick links to official IITM platforms:
 | Tool | Description |
 |------|-------------|
 | **Academic Calendar** | Detailed schedule for the current term and future long-term plans |
-| **Grade Predictor** | Estimate your final grades based on current assignments and quiz scores |
+| **Grade Predictor** | Estimate your final grades and dynamically calculate the exact End-Term marks required to achieve each possible target grade |
 | **Important Documents** | Quick access to student handbooks, academic calendars, and grading schemes |
 | **About** | Learn more about this platform and how you can contribute |
 

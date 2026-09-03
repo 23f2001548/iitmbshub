@@ -27,7 +27,7 @@ const GradePredictor = () => {
   useEffect(() => {
     const initialScores = {};
     course.components.forEach(comp => {
-      initialScores[comp.id] = 0;
+      initialScores[comp.id] = '';
     });
     setScores(initialScores);
   }, [course]);
@@ -41,6 +41,68 @@ const GradePredictor = () => {
     const letterGrade = getLetterGrade(calculatedScore);
     setResult({ score: calculatedScore, grade: letterGrade });
   }, [scores, course]);
+
+  const endTermComps = ['f', 'f_40'];
+  const endTermComp = course.components.find(c => endTermComps.includes(c.id));
+
+  const reverseCalculate = () => {
+    if (!endTermComp) return [];
+    const results = [];
+    
+    const coercedScores = {};
+    for (const key in scores) {
+      if (key !== endTermComp.id) {
+        coercedScores[key] = Number(scores[key]) || 0;
+      }
+    }
+
+    const grades = [
+      { name: 'S', threshold: 90 },
+      { name: 'A', threshold: 80 },
+      { name: 'B', threshold: 70 },
+      { name: 'C', threshold: 60 },
+      { name: 'D', threshold: 50 },
+      { name: 'E', threshold: 40 }
+    ];
+
+    grades.forEach(g => {
+      const scoreWith0 = course.calculate({ ...coercedScores, [endTermComp.id]: 0 });
+      const scoreWithMax = course.calculate({ ...coercedScores, [endTermComp.id]: endTermComp.max });
+      const epsilon = 0.0001;
+
+      if (scoreWith0 >= g.threshold - epsilon) {
+        results.push({ grade: g.name, status: 'secured' });
+      } else if (scoreWithMax < g.threshold - epsilon) {
+        results.push({ grade: g.name, status: 'impossible' });
+      } else {
+        let low = 0;
+        let high = endTermComp.max;
+        let ans = endTermComp.max;
+        for (let i = 0; i < 40; i++) {
+          let mid = (low + high) / 2;
+          if (course.calculate({ ...coercedScores, [endTermComp.id]: mid }) >= g.threshold - epsilon) {
+            ans = mid;
+            high = mid;
+          } else {
+            low = mid;
+          }
+        }
+        let requiredInt = Math.ceil(ans - 0.001);
+        if (requiredInt < 0) requiredInt = 0;
+        if (requiredInt > endTermComp.max) requiredInt = endTermComp.max;
+
+        results.push({ 
+          grade: g.name, 
+          status: 'achievable', 
+          required: requiredInt, 
+          max: endTermComp.max,
+          percentage: Math.round((requiredInt / endTermComp.max) * 100)
+        });
+      }
+    });
+
+    return results;
+  };
 
   const handleScoreChange = (id, value) => {
     setScores(prev => ({
@@ -192,8 +254,9 @@ const GradePredictor = () => {
           initial={{ x: 20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
+          className="sticky top-28"
         >
-          <div className={`p-8 border-4 sticky top-28 transition-colors duration-300 shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#FFF] ${gradeColors[result.grade]}`}>
+          <div className={`p-8 border-4 transition-colors duration-300 shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#FFF] ${gradeColors[result.grade]}`}>
             <div className="flex justify-between items-start mb-8">
               <div>
                 <h3 className="font-mono text-sm uppercase tracking-widest font-bold opacity-90">Predicted Grade</h3>
@@ -204,31 +267,55 @@ const GradePredictor = () => {
               </div>
             </div>
 
-            <div className="text-center my-16">
+            <div className="text-center my-8">
               <motion.div 
                 key={result.grade}
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className="font-display text-[10rem] leading-none font-black tracking-tighter mb-4"
+                className="font-display text-[8rem] leading-none font-black tracking-tighter mb-4"
               >
                 {result.grade}
               </motion.div>
-              <div className="font-mono text-3xl font-black opacity-90">
+              <div className="font-mono text-2xl font-black opacity-90">
                 SCORE: {result.score.toFixed(2)}
               </div>
             </div>
 
-            <div className="mt-12 bg-white/20 border-2 border-black p-6">
-              <div className="flex items-center justify-between font-mono text-sm font-bold uppercase">
-                <span className="opacity-90">Minimum for S:</span>
-                <span>90.00</span>
+            {endTermComp ? (
+              <div className="mt-12 bg-white/20 border-2 border-black p-6">
+                <div className="font-mono text-xs uppercase tracking-widest font-black mb-4 pb-3 border-b-2 border-current flex items-center justify-between">
+                  <span className="opacity-90">End-Term Goals</span>
+                  <span className="opacity-70">MAX: {endTermComp.max}</span>
+                </div>
+                <div className="space-y-0">
+                  {reverseCalculate().map((res, i, arr) => (
+                    <div key={res.grade}>
+                      <div className="flex justify-between items-center font-mono text-sm font-bold py-2">
+                        <span className="text-lg">Grade {res.grade}</span>
+                        <span className="opacity-90 text-right">
+                          {res.status === 'secured' && 'Secured ✓'}
+                          {res.status === 'impossible' && <span className="opacity-50 text-xs uppercase tracking-wider">Not possible</span>}
+                          {res.status === 'achievable' && `${res.required} / ${res.max} (${res.percentage}%)`}
+                        </span>
+                      </div>
+                      {i < arr.length - 1 && <div className="h-px bg-current opacity-20"></div>}
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="flex items-center justify-between font-mono text-sm font-bold uppercase mt-4">
-                <span className="opacity-90">Minimum to Pass:</span>
-                <span>40.00</span>
+            ) : (
+              <div className="mt-12 bg-white/20 border-2 border-black p-6">
+                <div className="flex items-center justify-between font-mono text-sm font-bold uppercase">
+                  <span className="opacity-90">Minimum for S:</span>
+                  <span>90.00</span>
+                </div>
+                <div className="flex items-center justify-between font-mono text-sm font-bold uppercase mt-4">
+                  <span className="opacity-90">Minimum to Pass:</span>
+                  <span>40.00</span>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </motion.div>
 
