@@ -76,10 +76,10 @@ const futureTermsData = {
 
 const getTypeStyles = (type) => {
   switch (type) {
-    case 'exam': return { bg: 'bg-[#FF2E00]', text: 'text-white', icon: <Edit3 className="w-5 h-5" /> };
-    case 'registration': return { bg: 'bg-[#0047FF]', text: 'text-white', icon: <ClipboardList className="w-5 h-5" /> };
-    case 'result': return { bg: 'bg-[#00E676]', text: 'text-black', icon: <CheckCircle2 className="w-5 h-5" /> };
-    default: return { bg: 'bg-black dark:bg-white', text: 'text-white dark:text-black', icon: <Info className="w-5 h-5" /> };
+    case 'exam': return { bg: 'bg-red-500/10', text: 'text-red-500', icon: <Edit3 className="w-5 h-5" />, badge: 'bg-red-500/20 text-red-600 dark:text-red-400' };
+    case 'registration': return { bg: 'bg-primary/10', text: 'text-primary', icon: <ClipboardList className="w-5 h-5" />, badge: 'bg-primary/20 text-primary' };
+    case 'result': return { bg: 'bg-emerald-500/10', text: 'text-emerald-500', icon: <CheckCircle2 className="w-5 h-5" />, badge: 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400' };
+    default: return { bg: 'bg-slate-500/10', text: 'text-slate-500 dark:text-slate-400', icon: <Info className="w-5 h-5" />, badge: 'bg-slate-500/20 text-slate-600 dark:text-slate-300' };
   }
 };
 
@@ -94,25 +94,25 @@ const EventRow = ({ event, index }) => {
       transition={{ delay: index * 0.02, type: 'spring', stiffness: 400, damping: 25 }}
       className="mb-4"
     >
-      <div className="group flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 bg-white dark:bg-[#1A1A1A] border-2 border-black dark:border-white/20 transition-all duration-150 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[4px_4px_0px_0px_#000] dark:hover:shadow-[4px_4px_0px_0px_#FFF]">
-        <div className="flex items-start space-x-6 w-full">
-          <div className={`p-4 border-2 border-black dark:border-transparent ${styles.bg} ${styles.text}`}>
+      <div className="group flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 glass hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5">
+        <div className="flex items-center space-x-5 w-full">
+          <div className={`p-3 rounded-xl ${styles.bg} ${styles.text} transition-colors`}>
             {styles.icon}
           </div>
           <div className="flex-grow">
-            <h4 className="font-display text-2xl font-black uppercase tracking-tight text-black dark:text-white mb-2">{event.name}</h4>
-            <div className="flex flex-col sm:flex-row sm:items-center font-mono text-sm font-bold uppercase tracking-widest text-black/60 dark:text-white/60 mt-2 space-y-2 sm:space-y-0 sm:space-x-3">
-              <span className="bg-[#F4F4F0] dark:bg-[#0B0B0B] px-3 py-1.5 border-2 border-black/10 dark:border-white/10">{event.start}</span>
+            <h4 className="font-sans text-lg font-bold text-foreground mb-1">{event.name}</h4>
+            <div className="flex flex-col sm:flex-row sm:items-center font-sans text-sm font-semibold text-foreground/60 mt-1 space-y-1 sm:space-y-0 sm:space-x-2">
+              <span className="bg-slate-100 dark:bg-slate-800/50 px-2.5 py-1 rounded-md">{event.start}</span>
               {event.end && (
                 <>
-                  <ChevronRight className="hidden sm:block w-4 h-4" />
-                  <span className="bg-[#F4F4F0] dark:bg-[#0B0B0B] px-3 py-1.5 border-2 border-black/10 dark:border-white/10">{event.end}</span>
+                  <ChevronRight className="hidden sm:block w-4 h-4 opacity-50" />
+                  <span className="bg-slate-100 dark:bg-slate-800/50 px-2.5 py-1 rounded-md">{event.end}</span>
                 </>
               )}
             </div>
           </div>
         </div>
-        <div className={`hidden lg:block uppercase font-mono text-xs font-black tracking-widest px-4 py-2 border-2 border-black dark:border-transparent mt-4 sm:mt-0 whitespace-nowrap ${styles.bg} ${styles.text}`}>
+        <div className={`hidden lg:block uppercase font-sans text-xs font-bold tracking-widest px-3 py-1.5 rounded-md mt-4 sm:mt-0 whitespace-nowrap ${styles.badge}`}>
           {event.type}
         </div>
       </div>
@@ -131,35 +131,35 @@ const Calendar = () => {
   ];
 
   return (
-    <div className="max-w-[1400px] mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-16 min-h-screen bg-[#F4F4F0] dark:bg-[#0B0B0B]">
+    <div className="max-w-[1400px] mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-16 min-h-screen relative z-10">
       
       {/* Header */}
       <motion.div 
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="text-center"
+        className="text-center max-w-3xl mx-auto flex flex-col items-center"
       >
-        <div className="inline-flex items-center justify-center p-4 bg-[#0047FF] text-white border-2 border-black mb-6">
-          <CalendarDays className="w-10 h-10" strokeWidth={2.5} />
+        <div className="inline-flex items-center justify-center p-4 bg-primary/10 text-primary rounded-2xl mb-6 shadow-inner">
+          <CalendarDays className="w-8 h-8" strokeWidth={2.5} />
         </div>
-        <h1 className="font-display text-5xl font-black text-black dark:text-white sm:text-6xl md:text-8xl tracking-tighter uppercase mb-4 leading-none">
-          Academic <br/> Calendar.
+        <h1 className="font-display text-5xl md:text-6xl font-extrabold tracking-tight text-foreground mb-6">
+          Academic <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-sky-400">Calendar.</span>
         </h1>
-        <p className="font-sans text-xl text-black/70 dark:text-white/70 max-w-2xl mx-auto font-bold tracking-wide">
+        <p className="font-sans text-lg text-foreground/70 font-medium tracking-wide">
           Comprehensive schedules, precisely mapped.
         </p>
       </motion.div>
 
       {/* Tabs */}
-      <div className="flex justify-center flex-wrap gap-4">
+      <div className="flex justify-center flex-wrap gap-3">
         {tabs.map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-4 font-mono text-sm uppercase font-bold tracking-widest border-2 transition-all duration-150 ${
+            className={`px-6 py-3 font-sans text-sm font-semibold rounded-xl transition-all duration-200 ${
               activeTab === tab.id
-                ? 'bg-[#0047FF] text-white border-black dark:border-[#0047FF]'
-                : 'bg-white dark:bg-[#1A1A1A] text-black dark:text-white border-black dark:border-white/20 hover:bg-[#0047FF] hover:text-white hover:border-black'
+                ? 'bg-primary text-primary-foreground shadow-md shadow-primary/20'
+                : 'glass hover:bg-slate-100 dark:hover:bg-slate-800 text-foreground/70 hover:text-foreground'
             }`}
           >
             {tab.label}
@@ -170,7 +170,7 @@ const Calendar = () => {
       {/* Content Area */}
       <motion.div 
         layout
-        className="min-h-[500px]"
+        className="min-h-[500px] max-w-4xl mx-auto"
       >
         <AnimatePresence mode="wait">
           {activeTab === 'sep2026' && (
@@ -179,30 +179,39 @@ const Calendar = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="space-y-24"
+              className="space-y-16"
             >
               <section>
-                <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#0047FF] pl-6">
-                  For Term Students
-                </h2>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="h-8 w-1.5 bg-primary rounded-full" />
+                  <h2 className="font-display text-2xl font-bold text-foreground">
+                    For Term Students
+                  </h2>
+                </div>
                 <div>
                   {sep2026Data.term.map((event, idx) => <EventRow key={`term-${idx}`} event={event} index={idx} />)}
                 </div>
               </section>
 
               <section>
-                <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#00E676] pl-6">
-                  For Qualifier Students
-                </h2>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="h-8 w-1.5 bg-emerald-500 rounded-full" />
+                  <h2 className="font-display text-2xl font-bold text-foreground">
+                    For Qualifier Students
+                  </h2>
+                </div>
                 <div>
                   {sep2026Data.qualifier.map((event, idx) => <EventRow key={`qual-${idx}`} event={event} index={idx} />)}
                 </div>
               </section>
 
               <section>
-                <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#FF2E00] pl-6">
-                  For DAD Qualifier
-                </h2>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="h-8 w-1.5 bg-red-500 rounded-full" />
+                  <h2 className="font-display text-2xl font-bold text-foreground">
+                    For DAD Qualifier
+                  </h2>
+                </div>
                 <div>
                   {sep2026Data.dad.map((event, idx) => <EventRow key={`dad-${idx}`} event={event} index={idx} />)}
                 </div>
@@ -218,9 +227,12 @@ const Calendar = () => {
               exit={{ opacity: 0, y: -20 }}
               className="space-y-8"
             >
-              <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#0047FF] pl-6">
-                Term Students (Jan 2027)
-              </h2>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-8 w-1.5 bg-primary rounded-full" />
+                <h2 className="font-display text-2xl font-bold text-foreground">
+                  Term Students (Jan 2027)
+                </h2>
+              </div>
               <div>
                 {futureTermsData.jan2027.map((event, idx) => <EventRow key={`jan-${idx}`} event={event} index={idx} />)}
               </div>
@@ -235,9 +247,12 @@ const Calendar = () => {
               exit={{ opacity: 0, y: -20 }}
               className="space-y-8"
             >
-              <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#0047FF] pl-6">
-                Term Students (May 2027)
-              </h2>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-8 w-1.5 bg-primary rounded-full" />
+                <h2 className="font-display text-2xl font-bold text-foreground">
+                  Term Students (May 2027)
+                </h2>
+              </div>
               <div>
                 {futureTermsData.may2027.map((event, idx) => <EventRow key={`may-${idx}`} event={event} index={idx} />)}
               </div>
@@ -252,9 +267,12 @@ const Calendar = () => {
               exit={{ opacity: 0, y: -20 }}
               className="space-y-8"
             >
-              <h2 className="font-display text-4xl font-black uppercase text-black dark:text-white mb-10 flex items-center gap-6 border-l-8 border-[#0047FF] pl-6">
-                Term Students (Sep 2027)
-              </h2>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-8 w-1.5 bg-primary rounded-full" />
+                <h2 className="font-display text-2xl font-bold text-foreground">
+                  Term Students (Sep 2027)
+                </h2>
+              </div>
               <div>
                 {futureTermsData.sep2027.map((event, idx) => <EventRow key={`sep27-${idx}`} event={event} index={idx} />)}
               </div>

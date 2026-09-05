@@ -3,19 +3,19 @@ import { Info, Heart, Code2 } from 'lucide-react';
 
 const About = () => {
   return (
-    <div className="max-w-[1400px] mx-auto px-4 py-20 sm:px-6 lg:px-8 min-h-screen flex flex-col items-center justify-center bg-[#F4F4F0] dark:bg-[#0B0B0B]">
+    <div className="max-w-[1400px] mx-auto px-4 py-20 sm:px-6 lg:px-8 min-h-screen flex flex-col items-center justify-center relative z-10">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-24"
+        className="text-center mb-24 max-w-3xl mx-auto flex flex-col items-center"
       >
-        <div className="inline-flex items-center justify-center p-4 bg-[#0047FF] text-white border-2 border-black mb-8">
-          <Info className="w-12 h-12" strokeWidth={2.5} />
+        <div className="inline-flex items-center justify-center p-4 bg-primary/10 text-primary rounded-2xl mb-6 shadow-inner">
+          <Info className="w-10 h-10" strokeWidth={2.5} />
         </div>
-        <h1 className="font-display text-5xl font-black text-black dark:text-white sm:text-6xl md:text-8xl tracking-tighter uppercase mb-6 leading-none">
-          About <br/> IITM BS Hub.
+        <h1 className="font-display text-5xl md:text-7xl font-extrabold tracking-tight text-foreground mb-6">
+          About <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-sky-400">IITM BS Hub.</span>
         </h1>
-        <p className="font-sans text-xl text-black/70 dark:text-white/70 max-w-2xl mx-auto font-bold uppercase tracking-widest">
+        <p className="font-sans text-lg text-foreground/70 font-bold uppercase tracking-widest">
           Built by students, for students.
         </p>
       </motion.div>
@@ -25,16 +25,17 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white dark:bg-[#1A1A1A] border-4 border-black dark:border-white/20 p-8 sm:p-12 shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#FFF] relative overflow-hidden"
+          className="glass p-8 sm:p-12 relative overflow-hidden"
         >
-          <div className="flex items-center gap-6 mb-8">
-            <div className="p-4 bg-black dark:bg-white text-white dark:text-black border-2 border-black">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-3xl -mr-20 -mt-20" />
+          <div className="flex items-center gap-6 mb-8 relative z-10">
+            <div className="p-4 bg-primary text-primary-foreground rounded-2xl shadow-lg shadow-primary/20">
               <Heart className="w-8 h-8" strokeWidth={2.5} />
             </div>
-            <h2 className="font-display text-4xl sm:text-5xl font-black uppercase text-black dark:text-white tracking-tighter">Our Mission</h2>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground tracking-tight">Our Mission</h2>
           </div>
           
-          <p className="font-sans text-black/80 dark:text-white/80 text-xl sm:text-2xl leading-relaxed font-medium">
+          <p className="font-sans text-foreground/80 text-xl leading-relaxed font-medium relative z-10">
             The IITM BS Hub is an unofficial, community-driven platform designed to aggregate useful tools, calculators, and resources for students enrolled in the IIT Madras BS Degree program. 
             <br/><br/>
             Our goal is to make academic planning and resource discovery as seamless as possible. No fluff, just utility.
@@ -45,16 +46,17 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-[#0047FF] border-4 border-black p-8 sm:p-12 shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#FFF] relative overflow-hidden"
+          className="glass !bg-primary/5 !border-primary/20 p-8 sm:p-12 relative overflow-hidden"
         >
-          <div className="flex items-center gap-6 mb-8">
-            <div className="p-4 bg-white text-black border-2 border-black">
+          <div className="absolute bottom-0 right-0 w-48 h-48 bg-sky-500/10 rounded-full blur-3xl -mr-20 -mb-20" />
+          <div className="flex items-center gap-6 mb-8 relative z-10">
+            <div className="p-4 bg-white/80 dark:bg-slate-800/80 text-primary rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
               <Code2 className="w-8 h-8" strokeWidth={2.5} />
             </div>
-            <h2 className="font-display text-4xl sm:text-5xl font-black uppercase text-white tracking-tighter">How to Contribute</h2>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground tracking-tight">How to Contribute</h2>
           </div>
           
-          <p className="font-sans text-white/90 text-xl sm:text-2xl leading-relaxed font-medium">
+          <p className="font-sans text-foreground/80 text-xl leading-relaxed font-medium relative z-10">
             This project is open-source. If you're a fellow student with ideas, bug reports, or code contributions, we'd love to hear from you in the future when we open up our repository!
           </p>
         </motion.div>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calculator, FileText, Info, LayoutDashboard, MessageSquare, Headset, ExternalLink, BarChart, ClipboardCheck, Users, CalendarDays, BookOpen, Video, ArrowRight } from 'lucide-react';
+import { Calculator, FileText, Info, LayoutDashboard, MessageSquare, Headset, ExternalLink, BarChart, ClipboardCheck, Users, CalendarDays, BookOpen, Video, ArrowRight, Sparkles } from 'lucide-react';
 
 const externalPortals = [
   {
@@ -158,21 +158,24 @@ const CardLink = ({ item, isInternal }) => {
   const content = (
     <motion.div
       variants={itemVariants}
-      className="bg-[#F4F4F0] dark:bg-[#0B0B0B] border-2 border-black dark:border-white/20 p-6 flex flex-col group relative h-full hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[4px_4px_0px_0px_#000] dark:hover:shadow-[4px_4px_0px_0px_#0047FF] transition-all duration-150"
+      whileHover={{ y: -5 }}
+      className="glass p-6 flex flex-col group relative h-full transition-all duration-300 overflow-hidden"
     >
+      <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-primary/20 transition-colors" />
+      
       <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-        {!isInternal && <ExternalLink className="w-5 h-5 text-black dark:text-white" />}
+        {!isInternal && <ExternalLink className="w-5 h-5 text-primary" />}
       </div>
       
-      <div className="p-3 bg-white dark:bg-[#1A1A1A] border-2 border-black dark:border-white/20 inline-flex w-fit mb-6">
-        <item.icon className="w-6 h-6 text-[#0047FF]" strokeWidth={2.5} />
+      <div className="p-3 bg-white/50 dark:bg-slate-800/50 rounded-xl inline-flex w-fit mb-6 shadow-sm border border-slate-200 dark:border-slate-700">
+        <item.icon className="w-6 h-6 text-primary" strokeWidth={2} />
       </div>
       
-      <h3 className="font-display text-xl font-bold text-black dark:text-white mb-3 tracking-tight">
+      <h3 className="font-display text-xl font-bold text-foreground mb-3 tracking-tight">
         {item.name}
       </h3>
       
-      <p className="font-sans text-sm text-black/70 dark:text-white/70 flex-grow leading-relaxed">
+      <p className="font-sans text-sm text-foreground/70 flex-grow leading-relaxed">
         {item.description}
       </p>
     </motion.div>
@@ -186,15 +189,20 @@ const CardLink = ({ item, isInternal }) => {
 };
 
 const Section = ({ title, items, isInternal = false }) => (
-  <section className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 border-t-2 border-black dark:border-white/20">
-    <motion.h2 
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      className="font-display text-4xl md:text-5xl font-black text-black dark:text-white mb-10 tracking-tighter uppercase"
+  <section className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 relative">
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700 to-transparent" />
+    
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      className="flex items-center gap-4 mb-10"
     >
-      {title}
-    </motion.h2>
+      <div className="h-8 w-1.5 bg-primary rounded-full" />
+      <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground tracking-tight">
+        {title}
+      </h2>
+    </motion.div>
     
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {items.map((item, i) => (
@@ -204,7 +212,7 @@ const Section = ({ title, items, isInternal = false }) => (
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.05, type: "spring", stiffness: 400, damping: 25 }}
-          className="h-full"
+          className="h-full z-10"
         >
           <CardLink item={item} isInternal={isInternal} />
         </motion.div>
@@ -215,20 +223,20 @@ const Section = ({ title, items, isInternal = false }) => (
 
 const Home = () => {
   return (
-    <div className="flex flex-col bg-[#F4F4F0] dark:bg-[#0B0B0B] overflow-hidden">
+    <div className="flex flex-col overflow-hidden relative">
       {/* Hero Section */}
-      <section className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto w-full min-h-[70vh] flex flex-col justify-center">
+      <section className="relative pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto w-full min-h-[75vh] flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          <div className="lg:col-span-8 z-10">
+          <div className="lg:col-span-7 z-10">
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              className="inline-flex items-center gap-3 px-4 py-2 border-2 border-black dark:border-white/20 bg-white dark:bg-[#1A1A1A] mb-8"
+              className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary mb-8 backdrop-blur-md"
             >
-              <span className="w-2 h-2 rounded-full bg-[#00E676] animate-pulse"></span>
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-black dark:text-white">
+              <Sparkles className="w-4 h-4" />
+              <span className="font-sans text-xs font-semibold tracking-wide">
                 Unofficial Student Directory
               </span>
             </motion.div>
@@ -237,17 +245,19 @@ const Home = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="font-display text-6xl md:text-8xl lg:text-[7.5rem] tracking-tighter font-black text-black dark:text-white leading-[0.9] uppercase mb-8"
+              className="font-display text-5xl md:text-7xl lg:text-[6rem] tracking-tight font-extrabold text-foreground leading-[1.1] mb-8"
             >
-              THE IITM BS <br />
-              <span className="text-[#0047FF]">INDEX.</span>
+              The IITM BS <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-sky-400">
+                Index.
+              </span>
             </motion.h1>
 
             <motion.p 
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="font-sans max-w-[45ch] text-lg md:text-xl text-black/70 dark:text-white/70 font-medium leading-relaxed mb-10"
+              className="font-sans max-w-[45ch] text-lg md:text-xl text-foreground/70 font-medium leading-relaxed mb-10"
             >
               Cut through the noise of scattered official emails. Every portal, tool, and resource in one definitive list.
             </motion.p>
@@ -258,28 +268,48 @@ const Home = () => {
               transition={{ delay: 0.3 }}
             >
               <button 
-                onClick={() => window.scrollTo({ top: window.innerHeight * 0.7, behavior: 'smooth' })}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-[#0047FF] text-white border-2 border-black font-mono font-bold uppercase tracking-widest hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[4px_4px_0px_0px_#000] dark:hover:shadow-[4px_4px_0px_0px_#FFF] transition-all duration-150"
+                onClick={() => window.scrollTo({ top: window.innerHeight * 0.75, behavior: 'smooth' })}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-sans font-semibold shadow-lg hover:shadow-xl hover:bg-primary/90 transition-all duration-200"
               >
                 Access Portals
-                <ArrowRight className="w-5 h-5" strokeWidth={3} />
+                <ArrowRight className="w-5 h-5" strokeWidth={2.5} />
               </button>
             </motion.div>
           </div>
           
-          {/* Decorative element for Brutalist visual interest */}
-          <div className="hidden lg:block lg:col-span-4 relative">
+          {/* Floating Glass Cards Graphic */}
+          <div className="hidden lg:block lg:col-span-5 relative h-[500px]">
              <motion.div 
-               initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-               animate={{ opacity: 1, scale: 1, rotate: 0 }}
-               transition={{ delay: 0.4, type: "spring", stiffness: 300, damping: 20 }}
-               className="aspect-square bg-[#0047FF] border-4 border-black shadow-[12px_12px_0px_0px_#000] dark:shadow-[12px_12px_0px_0px_#FFF] flex items-center justify-center p-8"
+               initial={{ opacity: 0, y: 50, x: 20 }}
+               animate={{ opacity: 1, y: 0, x: 0 }}
+               transition={{ delay: 0.4, type: "spring", stiffness: 300, damping: 25 }}
+               className="absolute top-10 right-10 w-64 h-64 glass rounded-3xl p-6 flex flex-col justify-between z-20 shadow-2xl"
              >
-               <div className="w-full h-full border-2 border-black/30 dark:border-white/30 flex items-center justify-center">
-                  <div className="w-3/4 h-3/4 border-2 border-black/50 dark:border-white/50 flex items-center justify-center">
-                     <span className="font-display text-8xl font-black text-black dark:text-white">BS</span>
-                  </div>
+               <div className="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center">
+                  <Calculator className="w-6 h-6 text-primary" />
                </div>
+               <div>
+                  <div className="w-3/4 h-3 bg-slate-200 dark:bg-slate-700 rounded-full mb-3" />
+                  <div className="w-1/2 h-3 bg-slate-200 dark:bg-slate-700 rounded-full" />
+               </div>
+             </motion.div>
+             
+             <motion.div 
+               initial={{ opacity: 0, y: -30, x: -30 }}
+               animate={{ opacity: 1, y: 0, x: 0 }}
+               transition={{ delay: 0.6, type: "spring", stiffness: 300, damping: 25 }}
+               className="absolute bottom-10 left-0 w-72 h-48 glass rounded-3xl p-6 flex flex-col justify-between z-10 opacity-80 backdrop-blur-sm shadow-xl"
+             >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-orange-500/20 rounded-2xl flex items-center justify-center">
+                      <LayoutDashboard className="w-6 h-6 text-accent" />
+                  </div>
+                  <div>
+                    <div className="w-24 h-3 bg-slate-200 dark:bg-slate-700 rounded-full mb-2" />
+                    <div className="w-16 h-2 bg-slate-100 dark:bg-slate-800 rounded-full" />
+                  </div>
+                </div>
+                <div className="w-full h-1 bg-gradient-to-r from-primary to-transparent rounded-full opacity-50" />
              </motion.div>
           </div>
         </div>

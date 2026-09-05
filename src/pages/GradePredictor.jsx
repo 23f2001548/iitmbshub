@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calculator, Award, BookOpen } from 'lucide-react';
+import { Calculator, Award, BookOpen, Sparkles } from 'lucide-react';
 import { coursesConfig, getLetterGrade } from '../utils/gradingLogic';
 
 const gradeColors = {
-  S: 'bg-[#00E676] text-black border-black',
-  A: 'bg-[#00E676] text-black border-black',
-  B: 'bg-[#0047FF] text-white border-black',
-  C: 'bg-[#FFEA00] text-black border-black',
-  D: 'bg-[#FF2E00] text-white border-black',
-  E: 'bg-[#FF2E00] text-white border-black',
-  U: 'bg-black text-white border-black dark:bg-white dark:text-black'
+  S: 'bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-emerald-500/20 border-emerald-500/20',
+  A: 'bg-gradient-to-br from-green-400 to-green-600 text-white shadow-green-500/20 border-green-500/20',
+  B: 'bg-gradient-to-br from-blue-400 to-blue-600 text-white shadow-blue-500/20 border-blue-500/20',
+  C: 'bg-gradient-to-br from-yellow-400 to-orange-400 text-white shadow-orange-500/20 border-orange-500/20',
+  D: 'bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-red-500/20 border-red-500/20',
+  E: 'bg-gradient-to-br from-red-500 to-rose-600 text-white shadow-rose-500/20 border-rose-500/20',
+  U: 'bg-gradient-to-br from-slate-700 to-slate-900 text-white shadow-slate-900/20 border-slate-700/20'
 };
 
 const GradePredictor = () => {
@@ -112,47 +112,51 @@ const GradePredictor = () => {
   };
 
   return (
-    <div className="max-w-[1400px] mx-auto px-4 py-16 sm:px-6 lg:px-8 min-h-screen bg-[#F4F4F0] dark:bg-[#0B0B0B]">
+    <div className="max-w-[1400px] mx-auto px-4 py-16 sm:px-6 lg:px-8 min-h-screen relative z-10">
       <motion.div 
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="mb-16"
+        className="mb-16 text-center max-w-3xl mx-auto flex flex-col items-center"
       >
-        <div className="inline-flex items-center justify-center p-4 bg-[#0047FF] text-white border-2 border-black mb-6">
-          <Calculator className="w-10 h-10" strokeWidth={2.5} />
+        <div className="inline-flex items-center justify-center p-4 bg-primary/10 rounded-2xl text-primary mb-6 shadow-inner">
+          <Calculator className="w-8 h-8" strokeWidth={2.5} />
         </div>
-        <h1 className="font-display text-5xl font-black text-black dark:text-white sm:text-6xl md:text-7xl tracking-tighter uppercase mb-4">
-          Grade <br/> Predictor.
+        <h1 className="font-display text-5xl md:text-6xl font-extrabold tracking-tight text-foreground mb-6">
+          Grade <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-sky-400">Predictor</span>
         </h1>
-        <p className="font-sans text-lg text-black/70 dark:text-white/70 max-w-2xl font-medium leading-relaxed">
+        <p className="font-sans text-lg text-foreground/70 font-medium leading-relaxed">
           Forecast your final course grade by experimenting with different score scenarios. No magic, just math.
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Left Column: Config */}
-        <div className="lg:col-span-2 space-y-8">
+        <div className="lg:col-span-7 xl:col-span-8 space-y-8">
           
           {/* Level Selector */}
           <motion.div 
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="bg-white dark:bg-[#1A1A1A] border-2 border-black dark:border-white/20 p-8 shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#FFF]"
+            className="glass p-8"
           >
-            <h2 className="font-display text-2xl font-black uppercase text-black dark:text-white mb-6 flex items-center gap-3">
-              <BookOpen className="w-6 h-6 text-[#0047FF]" /> Select Level
+            <h2 className="font-display text-xl font-bold text-foreground mb-6 flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                <BookOpen className="w-5 h-5" />
+              </div>
+              Course Selection
             </h2>
-            <div className="flex flex-wrap gap-3">
+            
+            <div className="flex flex-wrap gap-3 mb-8">
               {Object.keys(coursesConfig).map((lvl) => (
                 <button
                   key={lvl}
                   onClick={() => setLevel(lvl)}
-                  className={`px-6 py-3 font-mono text-sm uppercase font-bold tracking-widest border-2 transition-colors ${
+                  className={`px-5 py-2.5 font-sans text-sm font-semibold rounded-xl transition-all duration-200 ${
                     level === lvl
-                      ? 'bg-[#0047FF] text-white border-black dark:border-[#0047FF]'
-                      : 'bg-[#F4F4F0] dark:bg-[#0B0B0B] text-black dark:text-white border-black dark:border-white/20 hover:bg-[#0047FF] hover:text-white hover:border-black'
+                      ? 'bg-primary text-primary-foreground shadow-md shadow-primary/20'
+                      : 'bg-slate-100 dark:bg-slate-800 text-foreground/70 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-foreground'
                   }`}
                 >
                   {lvl}
@@ -161,23 +165,28 @@ const GradePredictor = () => {
             </div>
 
             {/* Course Selector */}
-            <div className="mt-8">
-              <label htmlFor="course-select" className="block font-mono text-xs uppercase tracking-widest font-bold text-black dark:text-white mb-3">
+            <div>
+              <label htmlFor="course-select" className="block font-sans text-xs font-bold text-foreground/50 uppercase tracking-widest mb-3 pl-1">
                 Select Course
               </label>
-              <select
-                id="course-select"
-                value={course.id}
-                onChange={(e) => {
-                  const selected = coursesConfig[level].find(c => c.id === e.target.value);
-                  setCourse(selected);
-                }}
-                className="block w-full pl-4 pr-10 py-4 text-base border-2 border-black dark:border-white/20 bg-[#F4F4F0] dark:bg-[#0B0B0B] text-black dark:text-white font-mono font-bold appearance-none cursor-pointer focus:outline-none focus:border-[#0047FF] transition-colors"
-              >
-                {coursesConfig[level].map((c) => (
-                  <option key={c.id} value={c.id}>{c.name}</option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  id="course-select"
+                  value={course.id}
+                  onChange={(e) => {
+                    const selected = coursesConfig[level].find(c => c.id === e.target.value);
+                    setCourse(selected);
+                  }}
+                  className="block w-full pl-4 pr-10 py-3.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl text-foreground font-semibold appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm"
+                >
+                  {coursesConfig[level].map((c) => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-foreground/50">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -186,9 +195,12 @@ const GradePredictor = () => {
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="bg-white dark:bg-[#1A1A1A] border-2 border-black dark:border-white/20 p-8 shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#FFF]"
+            className="glass p-8"
           >
-            <h2 className="font-display text-2xl font-black uppercase text-black dark:text-white mb-8 border-l-8 border-[#0047FF] pl-4">
+            <h2 className="font-display text-xl font-bold text-foreground mb-8 flex items-center gap-3">
+              <div className="p-2 bg-sky-500/10 rounded-lg text-sky-500">
+                <Sparkles className="w-5 h-5" />
+              </div>
               Enter Scores
             </h2>
             <div className="space-y-8">
@@ -200,11 +212,11 @@ const GradePredictor = () => {
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ delay: index * 0.05 }}
                     key={comp.id} 
-                    className="relative"
+                    className="relative bg-white/40 dark:bg-slate-800/40 p-5 rounded-2xl border border-slate-200/50 dark:border-slate-700/50"
                   >
-                    <div className="flex justify-between items-center mb-3">
-                      <label className="font-mono text-sm font-bold uppercase tracking-wide text-black dark:text-white">{comp.label}</label>
-                      <div className="flex items-center space-x-2 bg-[#F4F4F0] dark:bg-[#0B0B0B] px-3 py-2 border-2 border-black dark:border-white/20">
+                    <div className="flex justify-between items-center mb-4">
+                      <label className="font-sans text-sm font-bold text-foreground">{comp.label}</label>
+                      <div className="flex items-center space-x-2 bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5">
                         <input
                           type="number"
                           min="0"
@@ -219,25 +231,25 @@ const GradePredictor = () => {
                             }
                             handleScoreChange(comp.id, val);
                           }}
-                          className="w-16 text-right bg-transparent font-mono font-black text-xl text-[#0047FF] focus:outline-none placeholder-black/20 dark:placeholder-white/20"
+                          className="w-16 text-right bg-transparent font-sans font-bold text-lg text-primary focus:outline-none placeholder-foreground/20"
                           placeholder="0"
                         />
-                        <span className="font-mono text-sm font-bold text-black/50 dark:text-white/50">
+                        <span className="font-sans text-sm font-semibold text-foreground/40">
                           / {comp.max}
                         </span>
                       </div>
                     </div>
-                    <div className="relative group">
+                    <div className="relative group flex items-center h-4">
                       <input
                         type="range"
                         min="0"
                         max={comp.max}
                         value={scores[comp.id] || 0}
                         onChange={(e) => handleScoreChange(comp.id, Number(e.target.value))}
-                        className="w-full h-2 bg-black dark:bg-white/20 appearance-none cursor-pointer accent-[#0047FF] transition-all hover:h-4"
+                        className="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full appearance-none cursor-pointer accent-primary outline-none transition-all focus:ring-2 focus:ring-primary/20"
                       />
                     </div>
-                    <div className="flex justify-between font-mono text-xs font-bold text-black/50 dark:text-white/50 mt-2 px-1">
+                    <div className="flex justify-between font-sans text-xs font-semibold text-foreground/40 mt-1 px-1">
                       <span>0</span>
                       <span>{comp.max}</span>
                     </div>
@@ -250,80 +262,86 @@ const GradePredictor = () => {
         </div>
 
         {/* Right Column: Result */}
-        <motion.div 
-          initial={{ x: 20, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="sticky top-28"
-        >
-          <div className={`p-8 border-4 transition-colors duration-300 shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#FFF] ${gradeColors[result.grade]}`}>
-            <div className="flex justify-between items-start mb-8">
-              <div>
-                <h3 className="font-mono text-sm uppercase tracking-widest font-bold opacity-90">Predicted Grade</h3>
-                <p className="font-sans text-sm opacity-80 mt-1 font-bold">{course.name}</p>
-              </div>
-              <div className="p-3 bg-black/10 border-2 border-black">
-                <Award className="w-8 h-8" />
-              </div>
-            </div>
-
-            <div className="text-center my-8">
-              <motion.div 
-                key={result.grade}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className="font-display text-[8rem] leading-none font-black tracking-tighter mb-4"
-              >
-                {result.grade}
-              </motion.div>
-              <div className="font-mono text-2xl font-black opacity-90">
-                SCORE: {result.score.toFixed(2)}
-              </div>
-              {course.formula && (
-                <div className="mt-6 p-4 bg-black/10 border-2 border-black text-sm font-mono font-bold text-left">
-                  <div className="opacity-70 mb-2 text-xs uppercase tracking-widest">Grading Formula</div>
-                  <div className="leading-relaxed break-words">{course.formula}</div>
+        <div className="lg:col-span-5 xl:col-span-4">
+          <motion.div 
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="sticky top-28"
+          >
+            <div className={`p-8 rounded-3xl border border-white/20 transition-all duration-500 shadow-xl overflow-hidden relative ${gradeColors[result.grade]}`}>
+              <div className="absolute inset-0 bg-white/10 dark:bg-black/10 backdrop-blur-[2px]"></div>
+              
+              <div className="relative z-10">
+                <div className="flex justify-between items-start mb-8">
+                  <div>
+                    <h3 className="font-sans text-xs uppercase tracking-widest font-bold opacity-80 mb-1">Predicted Grade</h3>
+                    <p className="font-sans text-sm font-medium leading-tight max-w-[180px]">{course.name}</p>
+                  </div>
+                  <div className="p-3 bg-white/20 rounded-2xl backdrop-blur-md border border-white/20">
+                    <Award className="w-6 h-6" />
+                  </div>
                 </div>
-              )}
-            </div>
 
-            {endTermComp ? (
-              <div className="mt-12 bg-white/20 border-2 border-black p-6">
-                <div className="font-mono text-xs uppercase tracking-widest font-black mb-4 pb-3 border-b-2 border-current flex items-center justify-between">
-                  <span className="opacity-90">End-Term Goals</span>
-                  <span className="opacity-70">MAX: {endTermComp.max}</span>
+                <div className="text-center my-10">
+                  <motion.div 
+                    key={result.grade}
+                    initial={{ scale: 0.8, opacity: 0, y: 10 }}
+                    animate={{ scale: 1, opacity: 1, y: 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="font-display text-[7rem] leading-none font-black tracking-tighter drop-shadow-lg"
+                  >
+                    {result.grade}
+                  </motion.div>
+                  <div className="font-mono text-xl font-bold opacity-90 mt-2 bg-black/20 inline-block px-4 py-1.5 rounded-full backdrop-blur-sm">
+                    SCORE: {result.score.toFixed(2)}
+                  </div>
                 </div>
-                <div className="space-y-0">
-                  {reverseCalculate().map((res, i, arr) => (
-                    <div key={res.grade}>
-                      <div className="flex justify-between items-center font-mono text-sm font-bold py-2">
-                        <span className="text-lg">Grade {res.grade}</span>
-                        <span className="opacity-90 text-right">
-                          {res.status === 'secured' && 'Secured ✓'}
-                          {res.status === 'impossible' && <span className="opacity-50 text-xs uppercase tracking-wider">Not possible</span>}
-                          {res.status === 'achievable' && `${res.required} / ${res.max} (${res.percentage}%)`}
-                        </span>
+                
+                {course.formula && (
+                  <div className="mt-8 p-4 bg-black/10 rounded-xl backdrop-blur-md border border-white/10">
+                    <div className="opacity-70 mb-2 text-[10px] font-bold uppercase tracking-widest">Grading Formula</div>
+                    <div className="font-mono text-xs leading-relaxed break-words font-medium">{course.formula}</div>
+                  </div>
+                )}
+                
+                <div className="mt-6 pt-6 border-t border-white/20">
+                  {endTermComp ? (
+                    <div>
+                      <div className="font-sans text-[10px] uppercase tracking-widest font-bold mb-4 flex items-center justify-between opacity-80">
+                        <span>End-Term Goals</span>
+                        <span>MAX: {endTermComp.max}</span>
                       </div>
-                      {i < arr.length - 1 && <div className="h-px bg-current opacity-20"></div>}
+                      <div className="space-y-2">
+                        {reverseCalculate().map((res, i) => (
+                          <div key={res.grade} className="flex justify-between items-center bg-black/10 rounded-lg px-3 py-2 text-sm font-medium">
+                            <span>Grade {res.grade}</span>
+                            <span className="text-right text-xs font-bold">
+                              {res.status === 'secured' && 'Secured ✓'}
+                              {res.status === 'impossible' && <span className="opacity-60">Not possible</span>}
+                              {res.status === 'achievable' && `${res.required} / ${res.max} (${res.percentage}%)`}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  ))}
+                  ) : (
+                    <div className="space-y-2 text-sm font-medium">
+                      <div className="flex items-center justify-between bg-black/10 rounded-lg px-4 py-2">
+                        <span className="opacity-90">Minimum for S:</span>
+                        <span className="font-bold">90.00</span>
+                      </div>
+                      <div className="flex items-center justify-between bg-black/10 rounded-lg px-4 py-2">
+                        <span className="opacity-90">Minimum to Pass:</span>
+                        <span className="font-bold">40.00</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            ) : (
-              <div className="mt-12 bg-white/20 border-2 border-black p-6">
-                <div className="flex items-center justify-between font-mono text-sm font-bold uppercase">
-                  <span className="opacity-90">Minimum for S:</span>
-                  <span>90.00</span>
-                </div>
-                <div className="flex items-center justify-between font-mono text-sm font-bold uppercase mt-4">
-                  <span className="opacity-90">Minimum to Pass:</span>
-                  <span>40.00</span>
-                </div>
-              </div>
-            )}
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
+        </div>
 
       </div>
     </div>
