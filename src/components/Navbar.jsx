@@ -13,6 +13,7 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'Calendar', path: '/calendar' },
     { name: 'Grade Predictor', path: '/grade-predictor' },
+    { name: 'CGPA Calc', path: '/cgpa-calculator' },
     { name: 'Documents', path: '/documents' },
     { name: 'About', path: '/about' },
   ];
