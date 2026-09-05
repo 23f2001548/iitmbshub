@@ -280,6 +280,12 @@ const GradePredictor = () => {
               <div className="font-mono text-2xl font-black opacity-90">
                 SCORE: {result.score.toFixed(2)}
               </div>
+              {course.formula && (
+                <div className="mt-6 p-4 bg-black/10 border-2 border-black text-sm font-mono font-bold text-left">
+                  <div className="opacity-70 mb-2 text-xs uppercase tracking-widest">Grading Formula</div>
+                  <div className="leading-relaxed break-words">{course.formula}</div>
+                </div>
+              )}
             </div>
 
             {endTermComp ? (
