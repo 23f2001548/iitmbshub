@@ -4,7 +4,7 @@ Your all-in-one companion for the **IIT Madras BS Degree** program. Access tools
 
 Built with **React + Vite + TailwindCSS**.
 
-> **Note:** Recently overhauled with a strict **Premium Consumer + Brutalist** aesthetic using `@taste-skill` and `@impeccable`.
+> **Note:** Recently overhauled with a premium **Glassmorphism** aesthetic, featuring smooth gradients, dynamic micro-animations, and full dark-mode support.
 
 ---
 
@@ -31,6 +31,7 @@ Quick links to official IITM platforms:
 |------|-------------|
 | **Academic Calendar** | Detailed schedule for the current term and future long-term plans |
 | **Grade Predictor** | Estimate your final grades and dynamically calculate the exact End-Term marks required to achieve each possible target grade |
+| **CGPA Calculator** | Calculate your cumulative grade point average (CGPA) |
 | **Important Documents** | Quick access to student handbooks, academic calendars, and grading schemes |
 | **About** | Learn more about this platform and how you can contribute |
 

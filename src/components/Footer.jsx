@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
     <footer className="mt-auto border-t border-slate-200/50 dark:border-slate-700/50 bg-white/30 dark:bg-slate-900/30 backdrop-blur-md relative z-10">
@@ -13,6 +15,10 @@ const Footer = () => {
             </p>
           </div>
           <div className="flex flex-col items-start md:items-end space-y-4">
+            <div className="flex gap-4 font-sans text-sm font-medium text-foreground/60 mb-2">
+              <Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+              <Link to="/terms-and-conditions" className="hover:text-primary transition-colors">Terms & Conditions</Link>
+            </div>
             <p className="font-sans text-xs font-bold uppercase tracking-widest text-foreground/40">
               {new Date().getFullYear()} © IITM BS HUB
             </p>

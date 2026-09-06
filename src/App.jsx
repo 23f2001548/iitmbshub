@@ -7,6 +7,8 @@ import GradePredictor from './pages/GradePredictor';
 import CGPACalculator from './pages/CGPACalculator';
 import ImportantDocuments from './pages/ImportantDocuments';
 import About from './pages/About';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
               <Route path="/cgpa-calculator" element={<CGPACalculator />} />
               <Route path="/documents" element={<ImportantDocuments />} />
               <Route path="/about" element={<About />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             </Routes>
           </main>
           <Footer />
