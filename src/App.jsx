@@ -9,6 +9,7 @@ import ImportantDocuments from './pages/ImportantDocuments';
 import About from './pages/About';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Footer />
         </div>
       </div>
+      <Analytics />
     </Router>
   );
 }
