@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calculator, FileText, Info, LayoutDashboard, MessageSquare, Headset, ExternalLink, BarChart, ClipboardCheck, Users, CalendarDays, BookOpen, Video, ArrowRight, Sparkles } from 'lucide-react';
+import { Calculator, FileText, Info, LayoutDashboard, MessageSquare, Headset, ExternalLink, BarChart, ClipboardCheck, Users, CalendarDays, BookOpen, Video, ArrowRight, Sparkles, GraduationCap } from 'lucide-react';
 
 const externalPortals = [
   {
@@ -59,6 +59,12 @@ const features = [
     description: 'Estimate your final grades based on current assignments and quiz scores.',
     icon: Calculator,
     path: '/grade-predictor',
+  },
+  {
+    name: 'CGPA Calculator',
+    description: 'Calculate your cumulative grade point average (CGPA).',
+    icon: GraduationCap,
+    path: '/cgpa-calculator',
   },
   {
     name: 'Important Documents',
