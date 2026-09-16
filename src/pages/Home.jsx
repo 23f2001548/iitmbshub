@@ -78,6 +78,24 @@ const features = [
     icon: Info,
     path: '/about',
   },
+  {
+    name: 'Grading Scheme',
+    description: 'The official grading scheme and policies.',
+    icon: FileText,
+    url: 'https://docs.google.com/document/u/0/d/e/2PACX-1vT5PBOz4OH663W0IJPVGVjG_nfmYZGfFI7W1j-6wTLcex13O_7BZmf6a96Q6liO0W-mLZB5hOGZeNNl/pub?urp=gmail_link&pli=1',
+  },
+  {
+    name: 'Student Handbook',
+    description: 'The comprehensive student handbook for rules and guidelines.',
+    icon: BookOpen,
+    url: 'https://docs.google.com/document/u/1/d/e/2PACX-1vRxGnnDCVAO3KX2CGtMIcJQuDrAasVk2JHbDxkjsGrTP5ShhZK8N6ZSPX89lexKx86QPAUswSzGLsOA/pub?urp=gmail_link#h.r8u12s2fi3t',
+  },
+  {
+    name: 'Course Booklet',
+    description: 'Data Science Course Booklet with detailed syllabus.',
+    icon: BookOpen,
+    url: 'https://drive.google.com/file/d/1BJSLtuYTZPOSP-cuoX9BEAopOKqpDevs/view',
+  },
 ];
 
 const resourcesAndNotes = [
@@ -160,7 +178,9 @@ const itemVariants = {
   visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 400, damping: 25 } }
 };
 
-const CardLink = ({ item, isInternal }) => {
+const CardLink = ({ item }) => {
+  const isExternal = !!item.url;
+  
   const content = (
     <motion.div
       variants={itemVariants}
@@ -170,7 +190,7 @@ const CardLink = ({ item, isInternal }) => {
       <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-primary/20 transition-colors" />
       
       <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-        {!isInternal && <ExternalLink className="w-5 h-5 text-primary" />}
+        {isExternal && <ExternalLink className="w-5 h-5 text-primary" />}
       </div>
       
       <div className="p-3 bg-white/50 dark:bg-slate-800/50 rounded-xl inline-flex w-fit mb-6 shadow-sm border border-slate-200 dark:border-slate-700">
@@ -187,14 +207,14 @@ const CardLink = ({ item, isInternal }) => {
     </motion.div>
   );
 
-  return isInternal ? (
+  return !isExternal ? (
     <Link to={item.path} className="block h-full outline-none">{content}</Link>
   ) : (
     <a href={item.url} target="_blank" rel="noopener noreferrer" className="block h-full outline-none">{content}</a>
   );
 };
 
-const Section = ({ title, items, isInternal = false }) => (
+const Section = ({ title, items }) => (
   <section className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 relative">
     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700 to-transparent" />
     
@@ -220,7 +240,7 @@ const Section = ({ title, items, isInternal = false }) => (
           transition={{ delay: i * 0.05, type: "spring", stiffness: 400, damping: 25 }}
           className="h-full z-10"
         >
-          <CardLink item={item} isInternal={isInternal} />
+          <CardLink item={item} />
         </motion.div>
       ))}
     </div>
@@ -322,7 +342,7 @@ const Home = () => {
       </section>
 
       <Section title="Essential Portals" items={externalPortals} />
-      <Section title="Quick Access" items={features} isInternal={true} />
+      <Section title="Quick Access" items={features} />
       <Section title="Resources & Notes" items={resourcesAndNotes} />
       <Section title="PYQs & Mock Tests" items={pyqsAndMockTests} />
       <Section title="Channels to Subscribe" items={channelsToSubscribe} />

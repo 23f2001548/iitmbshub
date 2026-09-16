@@ -79,7 +79,7 @@ const CGPACalculator = () => {
     const hasDegreeCredits = stats.degreeBsc.credits > 0 || stats.degreeBs.credits > 0;
     if (hasDegreeCredits) {
       if (parseFloat(calcData.diplomaCumulativeCGPA) < 6.0) {
-         w.push("Your overall Foundation + Diploma CGPA is below 6.0. You cannot register for Degree courses.");
+         w.push("Your Courses CGPA is below 6.0. You cannot register for Degree courses.");
       }
       if (parseFloat(calcData.projectCGPA) < 7.0 && stats.diplomaDs.projects + stats.diplomaProg.projects > 0) {
          w.push("Your Diploma Project CGPA is below 7.0. You must improve this to register for Degree courses.");
@@ -305,7 +305,7 @@ const CGPACalculator = () => {
 
               <div className="space-y-3">
                 <div className="bg-slate-50/50 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50 rounded-xl p-4 flex justify-between items-center">
-                  <span className="font-semibold text-xs text-foreground/70 uppercase">Found. + Diploma CGPA</span>
+                  <span className="font-semibold text-xs text-foreground/70 uppercase">Courses CGPA</span>
                   <span className="font-bold text-lg text-foreground">{calcData.diplomaCumulativeCGPA}</span>
                 </div>
                 <div className="bg-slate-50/50 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50 rounded-xl p-4 flex justify-between items-center">

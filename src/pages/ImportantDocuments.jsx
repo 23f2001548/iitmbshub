@@ -66,6 +66,29 @@ const ImportantDocuments = () => {
             The comprehensive student handbook for rules, guidelines, and non-negotiable academic info.
           </p>
         </motion.a>
+
+        <motion.a 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          href="https://drive.google.com/file/d/1BJSLtuYTZPOSP-cuoX9BEAopOKqpDevs/view" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="glass p-8 flex flex-col items-start relative hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group overflow-hidden md:col-span-2 lg:col-span-1"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl -mr-10 -mt-10 group-hover:bg-emerald-500/10 transition-colors" />
+          <div className="flex items-center justify-between w-full mb-6 relative z-10">
+            <h3 className="font-display text-2xl font-bold text-foreground tracking-tight group-hover:text-primary transition-colors">
+              Course Booklet
+            </h3>
+            <div className="p-3 bg-white/50 dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground transition-colors">
+              <ExternalLink className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
+            </div>
+          </div>
+          <p className="font-sans text-foreground/70 text-left leading-relaxed font-medium relative z-10">
+            Data Science Course Booklet with detailed syllabus and curriculum information.
+          </p>
+        </motion.a>
       </div>
     </div>
   );
