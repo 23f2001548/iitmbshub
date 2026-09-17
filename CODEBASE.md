@@ -48,7 +48,7 @@ src/
 
 1. **Resource Directory (`Home.jsx`)**: Acts as a central hub linking to official IITM portals, student communities, and external tools.
 2. **Grade Predictor (`GradePredictor.jsx` + `gradingLogic.js`)**: A complex interactive tool that allows students to input assignments, quizzes, and project scores to estimate their final letter grade based on specific course grading schemas defined in `gradingLogic.js`.
-3. **CGPA Calculator (`CGPACalculator.jsx` + `cgpaCourses.js`)**: A comprehensive tool that calculates the cumulative GPA. It features a hybrid entry mode allowing both direct CGPA entry per level and course-by-course grade selection. The logic correctly handles degree streams (BP, BD, HM, SE), non-graded credits (NPTEL, Apprenticeship), and Diploma pathways, perfectly mirroring the official IITM Grade Card structure.
+3. **CGPA Calculator (`CGPACalculator.jsx` + `cgpaCourses.js`)**: A comprehensive tool that calculates the cumulative GPA. It features a hybrid entry mode allowing both direct CGPA entry per level and course-by-course grade selection. The logic correctly handles degree streams (BP, BD, HM, SE), non-graded credits (NPTEL, Apprenticeship), and Diploma pathways. It perfectly mirrors the official IITM Grade Card structure by blending Project grades into both the Diploma-level CGPAs and the Total CGPA, while preserving a separate standalone Project CGPA metric.
 4. **Theme Support (`ThemeContext.jsx`)**: The application supports full dark mode, styled using Tailwind's `dark:` variant and orchestrated by a global context.
 
 ## State Management
