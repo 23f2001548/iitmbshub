@@ -31,7 +31,7 @@ Quick links to official IITM platforms:
 |-----------------|-------------|------|
 | **Academic Calendar** | Detailed schedule for the current term and future long-term plans | [Visit](/calendar) |
 | **Grade Predictor** | Estimate your final grades and dynamically calculate the exact End-Term marks required to achieve each possible target grade | [Visit](/grade-predictor) |
-| **CGPA Calculator** | Calculate your cumulative grade point average (CGPA) | [Visit](/cgpa-calculator) |
+| **CGPA Calculator** | Calculate your cumulative grade point average (CGPA). Features a hybrid entry mode (Direct Grade Card Entry vs Course-by-Course), Diploma DS pathway selection, and exactly matches the official IITM Grade Card stream structure. | [Visit](/cgpa-calculator) |
 | **Important Documents** | Quick access to student handbooks, academic calendars, and grading schemes | [Visit](/documents) |
 | **About** | Learn more about this platform and how you can contribute | [Visit](/about) |
 | **Grading Scheme** | The official grading scheme and policies (September Term) | [Visit](https://docs.google.com/document/d/e/2PACX-1vT_FeqnTq0Br4sUaN7OYAmj1B9MwjchyTEed1Bh5FkZvi5NyIMeAvvkuttostVsJBPjZcs3SjjEfiho/pub) |

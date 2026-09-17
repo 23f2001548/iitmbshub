@@ -16,7 +16,7 @@ Prospective students browsing resources to understand the IIT Madras BS Degree p
 
 ## Product Purpose
 
-An all-in-one companion hub that centralizes scattered resources, official portals, tools (like Grade Predictor), and community links for the IITM BS Degree (actively maintained, including the latest September term updates). Success means a student never has to hunt for a link again.
+An all-in-one companion hub that centralizes scattered resources, official portals, tools (like the Grade Predictor and hybrid CGPA Calculator), and community links for the IITM BS Degree. It is actively maintained with the latest term updates, mirroring official structures like the Grade Card. Success means a student never has to hunt for a link again.
 
 ## Positioning
 
