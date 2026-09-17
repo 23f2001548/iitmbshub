@@ -82,7 +82,7 @@ const features = [
     name: 'Grading Scheme',
     description: 'The official grading scheme and policies.',
     icon: FileText,
-    url: 'https://docs.google.com/document/u/0/d/e/2PACX-1vT5PBOz4OH663W0IJPVGVjG_nfmYZGfFI7W1j-6wTLcex13O_7BZmf6a96Q6liO0W-mLZB5hOGZeNNl/pub?urp=gmail_link&pli=1',
+    url: 'https://docs.google.com/document/d/e/2PACX-1vT_FeqnTq0Br4sUaN7OYAmj1B9MwjchyTEed1Bh5FkZvi5NyIMeAvvkuttostVsJBPjZcs3SjjEfiho/pub',
   },
   {
     name: 'Student Handbook',

@@ -25,15 +25,18 @@ Quick links to official IITM platforms:
 
 ---
 
-### ⚡ Quick Access (In-App Tools)
+### ⚡ Quick Access
 
-| Tool | Description |
-|------|-------------|
-| **Academic Calendar** | Detailed schedule for the current term and future long-term plans |
-| **Grade Predictor** | Estimate your final grades and dynamically calculate the exact End-Term marks required to achieve each possible target grade |
-| **CGPA Calculator** | Calculate your cumulative grade point average (CGPA) |
-| **Important Documents** | Quick access to student handbooks, academic calendars, and grading schemes |
-| **About** | Learn more about this platform and how you can contribute |
+| Tool / Document | Description | Link |
+|-----------------|-------------|------|
+| **Academic Calendar** | Detailed schedule for the current term and future long-term plans | [Visit](/calendar) |
+| **Grade Predictor** | Estimate your final grades and dynamically calculate the exact End-Term marks required to achieve each possible target grade | [Visit](/grade-predictor) |
+| **CGPA Calculator** | Calculate your cumulative grade point average (CGPA) | [Visit](/cgpa-calculator) |
+| **Important Documents** | Quick access to student handbooks, academic calendars, and grading schemes | [Visit](/documents) |
+| **About** | Learn more about this platform and how you can contribute | [Visit](/about) |
+| **Grading Scheme** | The official grading scheme and policies (September Term) | [Visit](https://docs.google.com/document/d/e/2PACX-1vT_FeqnTq0Br4sUaN7OYAmj1B9MwjchyTEed1Bh5FkZvi5NyIMeAvvkuttostVsJBPjZcs3SjjEfiho/pub) |
+| **Student Handbook** | The comprehensive student handbook for rules and guidelines | [Visit](https://docs.google.com/document/u/1/d/e/2PACX-1vRxGnnDCVAO3KX2CGtMIcJQuDrAasVk2JHbDxkjsGrTP5ShhZK8N6ZSPX89lexKx86QPAUswSzGLsOA/pub?urp=gmail_link#h.r8u12s2fi3t) |
+| **Course Booklet** | Data Science Course Booklet with detailed syllabus | [Visit](https://drive.google.com/file/d/1BJSLtuYTZPOSP-cuoX9BEAopOKqpDevs/view) |
 
 ---
 

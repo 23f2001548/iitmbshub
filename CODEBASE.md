@@ -33,7 +33,7 @@ src/
 │   ├── Calendar.jsx    # Academic calendar view
 │   ├── CGPACalculator.jsx # Tool for calculating cumulative GPA
 │   ├── GradePredictor.jsx # Tool for predicting final grades based on logic
-│   ├── ImportantDocuments.jsx # Links to official PDFs and handbooks
+│   ├── ImportantDocuments.jsx # Links to official PDFs and handbooks (Updated for September Term)
 │   ├── PrivacyPolicy.jsx # Standard privacy notice
 │   └── TermsAndConditions.jsx # Terms of use and disclaimers
 ├── utils/              # Helper functions, pure logic, and static data
