@@ -58,6 +58,8 @@ const About = () => {
           
           <p className="font-sans text-foreground/80 text-xl leading-relaxed font-medium relative z-10">
             This project is open-source. If you're a fellow student with ideas, bug reports, or code contributions, we'd love to hear from you in the future when we open up our repository!
+            <br/><br/>
+            You can also reach out to me directly on <a href="https://www.linkedin.com/in/gauravjhaiitm" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">LinkedIn</a>.
           </p>
         </motion.div>
       </div>

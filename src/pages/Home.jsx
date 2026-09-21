@@ -96,6 +96,12 @@ const features = [
     icon: BookOpen,
     url: 'https://drive.google.com/file/d/1BJSLtuYTZPOSP-cuoX9BEAopOKqpDevs/view',
   },
+  {
+    name: 'Council Contacts',
+    description: 'Contact details of UHC and LHC members including RCs and Secretaries.',
+    icon: Users,
+    url: 'https://docs.google.com/document/d/e/2PACX-1vS1RwDJciGRW72T_4Rgu1kmUrMMliOkjml8raWPJ2cSTj2qRmWQCvhrXfUBMajsgy-KrpIvKS_bph4H/pub',
+  },
 ];
 
 const resourcesAndNotes = [
