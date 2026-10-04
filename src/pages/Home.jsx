@@ -127,10 +127,10 @@ const resourcesAndNotes = [
 
 const pyqsAndMockTests = [
   {
-    name: 'PYQ Platform',
-    description: 'Collection of previous year questions and practice materials.',
+    name: 'IITM Code Vistara',
+    description: 'IITM PYQ Practice for IIT Madras BS',
     icon: FileText,
-    url: 'https://mauryahub.onrender.com/',
+    url: 'https://iitmcodevistara.com/',
   },
   {
     name: 'QuizPractice Space',
@@ -139,16 +139,16 @@ const pyqsAndMockTests = [
     url: 'https://quizpractice.space/',
   },
   {
+    name: 'PYQ Platform',
+    description: 'Collection of previous year questions and practice materials.',
+    icon: FileText,
+    url: 'https://mauryahub.onrender.com/',
+  },
+  {
     name: 'OPPE Practice',
     description: 'Practice platform for OPPE.',
     icon: ClipboardCheck,
     url: 'https://oppe.rangalabs.cloud',
-  },
-  {
-    name: 'IITM Code Vistara',
-    description: 'IITM PYQ Practice for IIT Madras BS',
-    icon: FileText,
-    url: 'https://iitmcodevistara.com/',
   },
 ];
 
