@@ -144,6 +144,12 @@ const pyqsAndMockTests = [
     icon: ClipboardCheck,
     url: 'https://oppe.rangalabs.cloud',
   },
+  {
+    name: 'IITM Code Vistara',
+    description: 'IITM PYQ Practice for IIT Madras BS',
+    icon: FileText,
+    url: 'https://iitmcodevistara.com/',
+  },
 ];
 
 const channelsToSubscribe = [

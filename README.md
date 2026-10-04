@@ -57,6 +57,7 @@ Quick links to official IITM platforms:
 | **PYQ Platform – Shine in Exams!** by Ashish Maurya | Collection of previous year questions and practice materials | [Visit](https://mauryahub.onrender.com/) |
 | **QuizPractice Space** by SALMANUL FARIS | Recommended for all your quizzes practice | [Visit](https://quizpractice.space/) |
 | **OPPE Practice** | Practice platform for OPPE | [Visit](https://oppe.rangalabs.cloud) |
+| **IITM Code Vistara** | IITM PYQ Practice for IIT Madras BS | [Visit](https://iitmcodevistara.com/) |
 
 ---
 
