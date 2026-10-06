@@ -49,6 +49,12 @@ const externalPortals = [
 
 const features = [
   {
+    name: 'Study Room',
+    description: 'Join a virtual co-working space to study with other IITM BS students via video call.',
+    icon: Video,
+    path: '/study-room',
+  },
+  {
     name: 'Academic Calendar',
     description: 'View the detailed schedule for the current term and future plans.',
     icon: CalendarDays,

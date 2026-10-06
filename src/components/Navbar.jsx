@@ -14,6 +14,7 @@ const Navbar = () => {
     { name: 'Calendar', path: '/calendar' },
     { name: 'Grade Predictor', path: '/grade-predictor' },
     { name: 'CGPA Calc', path: '/cgpa-calculator' },
+    { name: 'Study Room', path: '/study-room' },
     { name: 'Documents', path: '/documents' },
     { name: 'About', path: '/about' },
   ];
