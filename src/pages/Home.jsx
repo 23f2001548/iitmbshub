@@ -148,7 +148,7 @@ const pyqsAndMockTests = [
     name: 'PYQ Platform',
     description: 'Collection of previous year questions and practice materials.',
     icon: FileText,
-    url: 'https://mauryahub.onrender.com/',
+    url: 'https://mauryahub.in/',
   },
   {
     name: 'OPPE Practice',
