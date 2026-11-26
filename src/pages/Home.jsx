@@ -1,8 +1,19 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calculator, FileText, Info, LayoutDashboard, MessageSquare, Headset, ExternalLink, BarChart, ClipboardCheck, Users, CalendarDays, BookOpen, Video, ArrowRight, Sparkles, GraduationCap } from 'lucide-react';
+import { 
+  Calculator, FileText, Info, LayoutDashboard, MessageSquare, Headset, 
+  ExternalLink, BarChart, ClipboardCheck, Users, CalendarDays, BookOpen, 
+  Video, ArrowRight, Sparkles, GraduationCap, Globe, FileCheck, Library, 
+  MessageCircle, Briefcase, ShieldAlert 
+} from 'lucide-react';
 
 const externalPortals = [
+  {
+    name: 'Official BS Website',
+    description: "The degree program's official home portal and announcements.",
+    icon: Globe,
+    url: 'https://study.iitm.ac.in/ds/',
+  },
   {
     name: 'IITM Dashboard',
     description: 'Official student dashboard for courses and grades.',
@@ -22,16 +33,22 @@ const externalPortals = [
     url: 'https://study-supportdesk.freshdesk.com/support/login',
   },
   {
-    name: 'Data Studio',
-    description: 'Academic performance analytics and reports.',
-    icon: BarChart,
-    url: 'https://datastudio.google.com/u/0/reporting/d02dac13-665b-49cc-8d51-0451268a6a3e/page/p_5egdu7yurd',
-  },
-  {
     name: 'Score Checker',
     description: 'Check current term scores, eligibility, and qualifier results.',
     icon: ClipboardCheck,
     url: 'https://study.iitm.ac.in/score-checker',
+  },
+  {
+    name: 'Data Studio',
+    description: 'Academic performance analytics and class reports.',
+    icon: BarChart,
+    url: 'https://datastudio.google.com/s/k3kRC9kDo54',
+  },
+  {
+    name: 'OPPE Exam Portal',
+    description: 'Scheduled online exam links and portal for OPPE exams.',
+    icon: FileCheck,
+    url: 'https://study.iitm.ac.in/ds/exam.html',
   },
   {
     name: 'Student Activities',
@@ -41,7 +58,7 @@ const externalPortals = [
   },
   {
     name: 'Course Planner',
-    description: 'Plan your courses and academic schedule.',
+    description: 'Plan your courses and academic schedule for upcoming terms.',
     icon: CalendarDays,
     url: 'https://course-planner-140256174016.asia-south1.run.app/dashboard',
   },
@@ -129,6 +146,66 @@ const resourcesAndNotes = [
     icon: Users,
     url: 'https://mauryahub.onrender.com/dashboard',
   },
+  {
+    name: "IITM BS Students' Corner",
+    description: 'Community-driven notes and study materials for most courses.',
+    icon: BookOpen,
+    url: 'https://www.iitmbsdegree.in/',
+  },
+  {
+    name: 'ML Study Hub (DegreeDost)',
+    description: 'Topic-wise notes, cheat sheets, and summaries for degree courses.',
+    icon: FileText,
+    url: 'https://degreedost.com/',
+  },
+  {
+    name: 'Student Link Library',
+    description: 'Comprehensive community-kept master list of links on Discourse.',
+    icon: Library,
+    url: 'https://discourse.onlinedegree.iitm.ac.in/t/links-to-almost-all-resources-at-one-place/88809',
+  },
+  {
+    name: 'Recommended Books',
+    description: 'Books and reference texts suggested across courses in one place.',
+    icon: BookOpen,
+    url: 'https://bsc-iitm.github.io/books/',
+  },
+  {
+    name: 'LITEPODS',
+    description: 'Comprehensive directory of links to everything in the BS programme.',
+    icon: Library,
+    url: 'https://bsc-iitm.github.io/litepods/',
+  },
+  {
+    name: 'Course Syllabus',
+    description: 'Official week-wise syllabus and roadmaps for every course.',
+    icon: FileText,
+    url: 'https://docs.google.com/document/u/1/d/e/2PACX-1vSWW4TMd2ujKYOeSay5iCIyTGLtJgM1KWC-Ernu_JdhugLtB0dXV9i966Z-ZaPZ9qAAI1_QtWa3o3br/pub#h.64f8davxbp1d',
+  },
+  {
+    name: 'Course Resources by Level',
+    description: 'Playlists, slides, and references for Foundation, Diploma, and Degree.',
+    icon: BookOpen,
+    url: 'https://discourse.onlinedegree.iitm.ac.in/t/foundation-level-resource/154274',
+  },
+  {
+    name: 'Pratham Bhalla on Medium',
+    description: 'Foundation level notes, walkthroughs, and past paper solutions.',
+    icon: FileText,
+    url: 'https://medium.com/@prathambhalla7',
+  },
+  {
+    name: 'Course WhatsApp Groups',
+    description: 'Student-run WhatsApp groups directory for every course.',
+    icon: MessageCircle,
+    url: 'https://sites.google.com/student.onlinedegree.iitm.ac.in/iitmbs-community',
+  },
+  {
+    name: 'Course Calendars',
+    description: 'Import official course calendars directly into Google Calendar.',
+    icon: CalendarDays,
+    url: 'https://discourse.onlinedegree.iitm.ac.in/t/course-tip-stay-on-top-of-your-term-with-calendar/44947',
+  },
 ];
 
 const pyqsAndMockTests = [
@@ -151,10 +228,103 @@ const pyqsAndMockTests = [
     url: 'https://mauryahub.in/',
   },
   {
+    name: 'Quiz Space',
+    description: 'Past quiz, end term, and OPPE practice papers.',
+    icon: ClipboardCheck,
+    url: 'https://quizspacee.com/',
+  },
+  {
     name: 'OPPE Practice',
     description: 'Practice platform for OPPE.',
     icon: ClipboardCheck,
     url: 'https://oppe.rangalabs.cloud',
+  },
+  {
+    name: 'Custodia',
+    description: 'Interactive OPPE practice environment with instant grading.',
+    icon: ClipboardCheck,
+    url: 'https://custodia-beta.vercel.app/',
+  },
+  {
+    name: 'Degree Question Paper Repository',
+    description: 'Past quiz and end term papers from Sep 2022, kept by IITM BS students.',
+    icon: FileText,
+    url: 'https://docs.google.com/spreadsheets/d/1ndm0pg3620crYW1yyUigW6NPE5cvHLk65IvHErEv7f4/edit?gid=1189182592#gid=1189182592',
+  },
+  {
+    name: 'Fetch PYQs',
+    description: 'Find past papers on file across terms or upload missing papers.',
+    icon: BookOpen,
+    url: 'https://script.google.com/a/macros/ds.study.iitm.ac.in/s/AKfycbzs7K5NYNosmnKhjI4nZMbS3_ZWLd0b6ZFIk5wZTNwxF9mBndt5cIZuCK9JG0i2ldA/exec',
+  },
+  {
+    name: 'Discourse Papers Repository',
+    description: 'Community initiative on Discourse to discover and share past papers.',
+    icon: FileText,
+    url: 'https://discourse.onlinedegree.iitm.ac.in/t/question-paper-repository-we-need-your-help/202463',
+  },
+];
+
+const careersAndHigherStudies = [
+  {
+    name: 'Placements Portal',
+    description: 'Official portal for IITM BS campus placements and internships.',
+    icon: Briefcase,
+    url: 'https://placements.study.iitm.ac.in/',
+  },
+  {
+    name: 'Placement Policy',
+    description: 'Official placement rules, eligibility criteria, and guidelines.',
+    icon: FileText,
+    url: 'https://docs.google.com/document/d/e/2PACX-1vRGX3FY8zu6F1QxjwBQjdFrb9DvxXWedfv1PHHAhgyXqkZ9D-EbGB4VuNSSv_NHpA/pub',
+  },
+  {
+    name: 'Placement Student Guide',
+    description: 'Comprehensive guide to landing internships and placements.',
+    icon: BookOpen,
+    url: 'https://docs.google.com/document/u/6/d/e/2PACX-1vRDVdDmrDy4To6HUQfpvDOP90wtl_7oD1tLf9HYaKE-plZ7K8-il-ribk51WaI1sWXGTlUvs3IjV150/pub',
+  },
+  {
+    name: 'Activity Points System',
+    description: 'Guidelines on earning mandatory activity points for placement support.',
+    icon: ClipboardCheck,
+    url: 'https://docs.google.com/document/d/1wzhKEFjsz4m9b7Slhgfc-vDz4GszH3RplDxJpJ37Kqg',
+  },
+  {
+    name: 'Official Resume Templates',
+    description: 'Placement cell verified standard resume templates.',
+    icon: FileText,
+    url: 'https://drive.google.com/drive/folders/1DOYyu4qJJM8OXR2pOv9WuXMVjYAkoHid?usp=drive_link',
+  },
+  {
+    name: 'Fake Internship Advisory',
+    description: 'Official Discourse warning against fraudulent internship providers.',
+    icon: ShieldAlert,
+    url: 'https://discourse.onlinedegree.iitm.ac.in/t/beware-of-fake-internship-providers/161512',
+  },
+  {
+    name: 'GATE DA Question Bank',
+    description: 'Practice questions for GATE Data Science & AI by IITM BS instructors.',
+    icon: GraduationCap,
+    url: 'https://iitmbsc-student-projects.github.io/gate-da',
+  },
+  {
+    name: 'GATE 2027 Portal',
+    description: 'Official GATE 2027 entrance exam website hosted by IIT Madras.',
+    icon: Globe,
+    url: 'https://gate2027.iitm.ac.in/',
+  },
+  {
+    name: 'Apprenticeship Programme',
+    description: 'Earn up to 12 degree credits through recognized industry work.',
+    icon: Briefcase,
+    url: 'https://docs.google.com/document/u/1/d/e/2PACX-1vQ_ZCTw1_PzVDBJ7u-wX18KUgl-IK1POIYRvyjAYsj_A-tS99K7ARRuNVKk0tp34B1woqclNxvY_0Lc/pub',
+  },
+  {
+    name: 'MTech Upgrade Guidelines',
+    description: 'Guidelines to upgrade into MTech or exit with a PG Diploma.',
+    icon: GraduationCap,
+    url: 'https://docs.google.com/document/u/1/d/e/2PACX-1vRrtiiHlurfHtFnJnDwtNZ0NHAci8PQ7pHsiX3V3SZKmbSmALDk4whCO5La6efs4MSmBLVTH2ZfGJNL/pub',
   },
 ];
 
@@ -170,6 +340,18 @@ const channelsToSubscribe = [
     description: 'Coding tutorials, project walkthroughs, and course help.',
     icon: Video,
     url: 'https://www.youtube.com/@Code_Synth',
+  },
+  {
+    name: 'Degree Revision by Lalit Kumar',
+    description: 'Concept walkthroughs and degree-level revision sessions.',
+    icon: Video,
+    url: 'https://www.youtube.com/channel/UCw8-ZEkw9gVXEBw5P96kDjw',
+  },
+  {
+    name: 'BS Course Lecture Playlists',
+    description: 'Directory of all course playlists and YouTube channels on Discourse.',
+    icon: Video,
+    url: 'https://discourse.onlinedegree.iitm.ac.in/t/iitm-bs-course-playlist-youtube/101319',
   },
   {
     name: 'Parampreet Singh',
@@ -363,6 +545,7 @@ const Home = () => {
       <Section title="Quick Access" items={features} />
       <Section title="Resources & Notes" items={resourcesAndNotes} />
       <Section title="PYQs & Mock Tests" items={pyqsAndMockTests} />
+      <Section title="Careers & Higher Studies" items={careersAndHigherStudies} />
       <Section title="Channels to Subscribe" items={channelsToSubscribe} />
       
     </div>
